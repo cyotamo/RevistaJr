@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revista Científica da Faculdade</title>
+  <style>
+    :root {
+      --azul-escuro: #0a3a7e;
+      --azul-suave: #114f9a;
+      --cinza-claro: #f4f6f8;
+      --texto-principal: #1f2933;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: var(--texto-principal);
+      background-color: #ffffff;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--azul-escuro);
+      color: #ffffff;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .topo {
+      display: grid;
+      gap: 6px;
+    }
+
+    .topo h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .topo h2 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .topo p {
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    nav {
+      background: #0e4c92;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      padding: 14px 10px;
+      margin: 0;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background: var(--azul-suave);
+    }
+
+    main {
+      padding: 50px 0 40px;
+    }
+
+    section {
+      padding: 36px 0;
+      border-bottom: 1px solid #e0e7ef;
+    }
+
+    .secao-titulo {
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      color: var(--azul-escuro);
+    }
+
+    .hero {
+      background: var(--cinza-claro);
+      border-radius: 10px;
+      padding: 36px;
+      display: grid;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .hero h3 {
+      font-size: 1.6rem;
+      color: var(--azul-escuro);
+    }
+
+    .botoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      background: var(--azul-escuro);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: var(--azul-suave);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .cards-grade {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card {
+      background: #fafbfc;
+      border: 1px solid #e3e7ed;
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .card h4 {
+      margin-bottom: 6px;
+      color: var(--azul-escuro);
+      font-size: 1.05rem;
+    }
+
+    .card small {
+      color: #5c6b7a;
+    }
+
+    ul,
+    ol {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    ul li,
+    ol li {
+      margin-bottom: 8px;
+    }
+
+    .edicoes .card p {
+      margin: 10px 0 14px;
+    }
+
+    .contactos form {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .contactos label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: var(--texto-principal);
+    }
+
+    .contactos input,
+    .contactos textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d4d9df;
+      border-radius: 6px;
+      font: inherit;
+      background: #ffffff;
+    }
+
+    .contactos textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .contactos .btn {
+      justify-self: start;
+      margin-top: 6px;
+    }
+
+    footer {
+      background: #0a335f;
+      color: #dfe8f5;
+      padding: 18px 0;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    footer p + p {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: #cdd8e8;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 30px 16px;
+      }
+
+      .hero {
+        padding: 28px;
+      }
+
+      nav ul {
+        justify-content: flex-start;
+      }
+
+      nav a {
+        padding: 10px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topo">
+      <p>Universidade Rovuma</p>
+      <h1>Faculdade de Ciências Económicas e Empresariais</h1>
+      <h2>Revista Científica da Faculdade</h2>
+      <p>Plataforma de divulgação de produção científica</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre a Revista</a></li>
+        <li><a href="#ambito">Objectivos e Âmbito</a></li>
+        <li><a href="#conselho">Conselho Editorial</a></li>
+        <li><a href="#normas">Normas de Submissão</a></li>
+        <li><a href="#edicoes">Edições Publicadas</a></li>
+        <li><a href="#contactos">Contactos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="inicio">
+    <div class="container">
+      <section class="hero">
+        <h3>Revista Científica da Faculdade de Ciências Económicas e Empresariais</h3>
+        <p>Publicação académica dedicada à disseminação de conhecimento científico em ciências económicas, empresariais e áreas afins, fomentando o diálogo entre investigadores, docentes e profissionais.</p>
+        <div class="botoes">
+          <a class="btn" href="#">Submeter Artigo</a>
+          <a class="btn" href="#">Ver Edições Publicadas</a>
+        </div>
+      </section>
+
+      <section id="sobre">
+        <h3 class="secao-titulo">Sobre a Revista</h3>
+        <p>A revista é um espaço académico rigoroso dedicado à publicação de artigos originais, revisões e estudos aplicados nas ciências económicas e empresariais. Procura garantir qualidade editorial e relevância científica.</p>
+        <p>As áreas científicas abrangem economia, gestão, finanças, contabilidade, empreendedorismo, inovação e temas interdisciplinares relacionados ao desenvolvimento sustentável e políticas públicas.</p>
+        <p>O público-alvo inclui investigadores, docentes, estudantes de pós-graduação e profissionais interessados em evidências científicas e práticas inovadoras.</p>
+      </section>
+
+      <section id="ambito">
+        <h3 class="secao-titulo">Objectivos e Âmbito</h3>
+        <ul>
+          <li>Divulgar resultados de investigação científica com impacto regional e internacional.</li>
+          <li>Incentivar a publicação de estudos inéditos e relevantes para as ciências económicas e empresariais.</li>
+          <li>Promover o intercâmbio de conhecimento entre academia, sector público e privado.</li>
+          <li>Garantir padrões éticos e de integridade na comunicação científica.</li>
+        </ul>
+        <p>Âmbito editorial: aceitam-se artigos científicos originais, revisões de literatura, estudos de caso, notas técnicas e resenhas de obras. A revista publica em português e inglês, com foco em temas de economia aplicada, gestão organizacional, finanças, políticas públicas e desenvolvimento sustentável. Os manuscritos devem seguir a estrutura IMRAD, respeitar extensão máxima de 8.000 palavras e utilizar formatação consistente em margens, espaçamento e tipo de letra.</p>
+      </section>
+
+      <section id="conselho">
+        <h3 class="secao-titulo">Conselho Editorial</h3>
+        <div class="cards-grade">
+          <article class="card">
+            <h4>Dra. Helena Matola</h4>
+            <small>Universidade Rovuma | helena.matola@exemplo.mz</small>
+            <p>Professora Associada, especialista em economia do desenvolvimento e políticas públicas.</p>
+          </article>
+          <article class="card">
+            <h4>Dr. Rui Gouveia</h4>
+            <small>Universidade Rovuma | rui.gouveia@exemplo.mz</small>
+            <p>Investigador em finanças corporativas e mercados emergentes.</p>
+          </article>
+          <article class="card">
+            <h4>Mestre Carla Nogueira</h4>
+            <small>Instituto Superior de Gestão | carla.nogueira@exemplo.mz</small>
+            <p>Especialista em gestão estratégica e inovação empresarial.</p>
+          </article>
+          <article class="card">
+            <h4>Dr. Paulo Langa</h4>
+            <small>Universidade de Maputo | paulo.langa@exemplo.mz</small>
+            <p>Pesquisador em políticas económicas e integração regional.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="normas">
+        <h3 class="secao-titulo">Normas de Submissão</h3>
+        <ul>
+          <li>Formato do artigo: estrutura IMRAD, até 8.000 palavras, margens de 2,5 cm e tipo de letra 12 pt.</li>
+          <li>Estilo de referências: norma APA (7ª edição) ou equivalente, com citações claras e completas.</li>
+          <li>Processo editorial: avaliação dupla-cega por pares, com possibilidade de revisões solicitadas.</li>
+          <li>Idiomas aceites: português e inglês.</li>
+          <li>Prazos: submissões contínuas, com datas de fecho semestrais para cada edição.</li>
+        </ul>
+        <a class="btn" href="#">Descarregar Modelo de Artigo (PDF)</a>
+      </section>
+
+      <section id="edicoes" class="edicoes">
+        <h3 class="secao-titulo">Edições Publicadas</h3>
+        <div class="cards-grade">
+          <article class="card">
+            <h4>Volume 1, Número 1 — 2023</h4>
+            <p>Estudos inaugurais sobre inovação financeira, empreendedorismo local e políticas de crescimento.</p>
+            <a class="btn" href="#">Ver Sumário</a>
+          </article>
+          <article class="card">
+            <h4>Volume 1, Número 2 — 2023</h4>
+            <p>Análises sobre sustentabilidade empresarial, governança e inclusão económica.</p>
+            <a class="btn" href="#">Ver Sumário</a>
+          </article>
+          <article class="card">
+            <h4>Volume 2, Número 1 — 2024</h4>
+            <p>Investigação aplicada em políticas públicas, mercados emergentes e transformação digital.</p>
+            <a class="btn" href="#">Ver Sumário</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="contactos" class="contactos">
+        <h3 class="secao-titulo">Contactos</h3>
+        <p>Faculdade de Ciências Económicas e Empresariais, Campus Universitário, Avenida do Saber, Cidade de Nampula.</p>
+        <p>Email: revista.fcee@exemplo.mz | Telefone: (+258) 21 000 000</p>
+        <form>
+          <div>
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" name="nome" placeholder="O seu nome">
+          </div>
+          <div>
+            <label for="email">E-mail</label>
+            <input id="email" type="email" name="email" placeholder="nome@exemplo.com">
+          </div>
+          <div>
+            <label for="assunto">Assunto</label>
+            <input id="assunto" type="text" name="assunto" placeholder="Tema da mensagem">
+          </div>
+          <div>
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Escreva a sua mensagem"></textarea>
+          </div>
+          <a class="btn" href="#">Enviar Mensagem</a>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Revista Científica da Faculdade. Todos os direitos reservados.</p>
+      <p>A revista adota princípios de ética, transparência e boas práticas editoriais em todas as etapas do processo de publicação.</p>
+    </div>
+  </footer>
+</body>
+</html>
