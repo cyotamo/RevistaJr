@@ -1,6 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll("nav a");
   const sections = document.querySelectorAll(".tab");
+  const logoutButton = document.querySelector(".logout-btn");
+
+  if (logoutButton) {
+    logoutButton.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  }
 
   tabs.forEach(tab => {
     tab.addEventListener("click", e => {
