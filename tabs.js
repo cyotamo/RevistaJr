@@ -35,8 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (btnOkLogin) {
     btnOkLogin.addEventListener("click", () => {
-      modal.style.display = "none";
-      window.location.href = "gestor.html";
+      const email = document.getElementById("emailLogin").value;
+      const senha = document.getElementById("senhaLogin").value;
+
+      loginFirebase(email, senha)
+        .then(() => {
+          window.location.href = "gestor.html";
+        })
+        .catch(() => {
+          alert("Email ou senha incorrectos");
+        });
     });
   }
 
