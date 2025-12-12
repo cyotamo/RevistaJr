@@ -1,28 +1,18 @@
-:root {
-  --azul-escuro: #0a3a7e;
-  --azul-suave: #114f9a;
-  --cinza-claro: #f4f6f8;
-}
-
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-}
-
 /* ===== CABEÇALHO ===== */
 header {
   background: var(--azul-escuro);
   color: white;
-  padding: 40px 20px;
+  padding: 20px 20px;   /* era 40px → reduzido */
   position: relative;
   text-align: center;
 }
 
+/* Botão Login continua igual */
 .login-btn {
   position: absolute;
   right: 20px;
-  top: 20px;
-  padding: 8px 16px;
+  top: 15px;            /* ligeiramente ajustado */
+  padding: 6px 14px;
   background: white;
   color: var(--azul-escuro);
   border: none;
@@ -32,63 +22,33 @@ header {
   font-size: 0.9rem;
 }
 
+/* Linhas do cabeçalho com menos espaço */
 .header-center {
   display: grid;
-  gap: 6px;
+  gap: 3px;              /* antes 6px → reduzido para aproximar linhas */
+  line-height: 1.2;      /* mais compacto */
 }
 
-/* ===== MENU ===== */
-nav {
-  background: var(--azul-suave);
+/* Universidade Rovuma (mantém discreto) */
+.header-center p:first-child {
+  font-size: 1rem;
+  opacity: 0.9;
 }
 
-nav ul {
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-  gap: 20px;
-  padding: 14px 0;
-  list-style: none;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
+/* Faculdade — AGORA menor */
+.header-center h1 {
+  font-size: 1.3rem;       /* antes ~2rem → agora mais discreto */
   font-weight: 600;
 }
 
-nav a.active {
-  border-bottom: 2px solid white;
+/* Revista Científica — AGORA um pouco maior */
+.header-center h2 {
+  font-size: 1.45rem;      /* ligeiramente maior */
+  font-weight: 700;
 }
 
-/* ===== TABS ===== */
-.tab {
-  display: none;
-  padding: 30px 20px;
-}
-
-.tab.active {
-  display: block;
-}
-
-.secao-titulo {
-  color: var(--azul-escuro);
-  font-size: 1.7rem;
-  margin-bottom: 10px;
-}
-
-.btn {
-  background: var(--azul-escuro);
-  color: white;
-  padding: 10px 16px;
-  text-decoration: none;
-  border-radius: 6px;
-}
-
-/* ===== FOOTER ===== */
-footer {
-  background: #0a335f;
-  color: #dfe8f5;
-  padding: 14px;
-  text-align: center;
+/* Última frase discreta */
+.header-center p:last-child {
+  font-size: 0.95rem;
+  opacity: 0.9;
 }
