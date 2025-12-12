@@ -3,9 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".tab");
   const logoutButton = document.querySelector(".logout-btn");
 
+  verificarAuth(user => {
+    if (!user) {
+      window.location.href = "index.html";
+    }
+  });
+
   if (logoutButton) {
     logoutButton.addEventListener("click", () => {
-      window.location.href = "index.html";
+      logoutFirebase().then(() => {
+        window.location.href = "index.html";
+      });
     });
   }
 
