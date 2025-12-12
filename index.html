@@ -73,15 +73,51 @@
       <p>Listagem das edições anteriores...</p>
     </section>
 
-   <section id="submissao" class="tab">
-      <h3 class="secao-titulo">Nova Submissão de Artigo</h3>
-  <p>Aqui o autor poderá enviar um novo manuscrito para avaliação pela revista.</p>
+    <section id="submissao" class="tab">
+      <form id="formNovaSubmissao" enctype="multipart/form-data">
 
-  <div class="botoes">
-    <a class="btn" href="#">Enviar Artigo</a>
-    <a class="btn" href="#">Consultar Normas</a>
-   </div>
-   </section>
+        <h3>Submeta aqui o seu artigo</h3>
+
+        <label>Nome</label>
+        <input type="text" name="nome" required>
+
+        <label>Número de Estudante</label>
+        <input type="text" name="numero" placeholder="XX.XXXX.XXXX" required>
+
+        <label>Curso</label>
+        <select name="curso" id="cursoSelect" required>
+          <option value="">— Seleccione o curso —</option>
+        </select>
+
+        <label>Linha de Pesquisa</label>
+        <select name="linha" id="linhaSelect" required>
+          <option value="">— Seleccione a linha de pesquisa —</option>
+        </select>
+
+        <label>Autor 1</label>
+        <input type="text" name="autor1" required>
+
+        <label>Autor 2</label>
+        <input type="text" name="autor2">
+
+        <label>Autor 3</label>
+        <input type="text" name="autor3">
+
+        <label>E-mail</label>
+        <input type="email" name="email" required>
+
+        <label>Contacto WhatsApp</label>
+        <input type="tel" name="contacto" required>
+
+        <label>Anexar artigo (.doc ou .docx)</label>
+        <input type="file" name="ficheiro" accept=".doc,.docx" required>
+
+        <button type="submit">Enviar</button>
+
+      </form>
+
+      <script src="submissao.js"></script>
+    </section>
 
     
     <section id="contactos" class="tab">
