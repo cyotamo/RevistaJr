@@ -16,53 +16,66 @@ body {
 }
 
 /* ===== CABEÇALHO ===== */
+/* ===== CABEÇALHO (VERSÃO COMPACTA) ===== */
 header {
   background: var(--azul-escuro);
   color: white;
-  padding: 20px 20px;
+  padding: 10px 20px;   /* altura MUITO reduzida */
   position: relative;
   text-align: center;
 }
 
+/* Botão Login */
 .login-btn {
   position: absolute;
   right: 20px;
-  top: 15px;
-  padding: 6px 14px;
+  top: 10px;
+  padding: 5px 12px;
   background: white;
   color: var(--azul-escuro);
   border: none;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
+/* Linhas MUITO mais próximas */
 .header-center {
   display: grid;
-  gap: 3px;
-  line-height: 1.2;
+  gap: 0px;               /* nenhum espaçamento entre as linhas */
+  line-height: 1.05;      /* linhas bem compactas */
+  margin-top: 10px;
 }
 
+/* Universidade Rovuma */
 .header-center p:first-child {
-  font-size: 1rem;
-  opacity: 0.9;
-}
-
-.header-center h1 {
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-.header-center h2 {
-  font-size: 1.45rem;
-  font-weight: 700;
-}
-
-.header-center p:last-child {
   font-size: 0.95rem;
   opacity: 0.9;
+  margin: 0;
 }
+
+/* Faculdade — discreto */
+.header-center h1 {
+  font-size: 1.15rem;      /* reduzido */
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Revista Científica — discretamente maior */
+.header-center h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Última frase */
+.header-center p:last-child {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
 
 /* ===== MENU ===== */
 nav {
