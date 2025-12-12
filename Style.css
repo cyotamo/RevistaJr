@@ -1,0 +1,94 @@
+:root {
+  --azul-escuro: #0a3a7e;
+  --azul-suave: #114f9a;
+  --cinza-claro: #f4f6f8;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== CABEÇALHO ===== */
+header {
+  background: var(--azul-escuro);
+  color: white;
+  padding: 40px 20px;
+  position: relative;
+  text-align: center;
+}
+
+.login-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  padding: 8px 16px;
+  background: white;
+  color: var(--azul-escuro);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.header-center {
+  display: grid;
+  gap: 6px;
+}
+
+/* ===== MENU ===== */
+nav {
+  background: var(--azul-suave);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding: 14px 0;
+  list-style: none;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a.active {
+  border-bottom: 2px solid white;
+}
+
+/* ===== TABS ===== */
+.tab {
+  display: none;
+  padding: 30px 20px;
+}
+
+.tab.active {
+  display: block;
+}
+
+.secao-titulo {
+  color: var(--azul-escuro);
+  font-size: 1.7rem;
+  margin-bottom: 10px;
+}
+
+.btn {
+  background: var(--azul-escuro);
+  color: white;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: #0a335f;
+  color: #dfe8f5;
+  padding: 14px;
+  text-align: center;
+}
