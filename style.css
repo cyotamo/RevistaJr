@@ -1,17 +1,33 @@
+/* ===== VARIÁVEIS DO TEMA ===== */
+:root {
+  --azul-escuro: #0a3a7e;
+  --azul-suave: #114f9a;
+  --cinza-claro: #f4f6f8;
+  --texto-principal: #1f2933;
+}
+
+/* ===== RESET ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--texto-principal);
+  background: white;
+  line-height: 1.5;
+}
+
 /* ===== CABEÇALHO ===== */
 header {
   background: var(--azul-escuro);
   color: white;
-  padding: 20px 20px;   /* era 40px → reduzido */
+  padding: 20px 20px;
   position: relative;
   text-align: center;
 }
 
-/* Botão Login continua igual */
 .login-btn {
   position: absolute;
   right: 20px;
-  top: 15px;            /* ligeiramente ajustado */
+  top: 15px;
   padding: 6px 14px;
   background: white;
   color: var(--azul-escuro);
@@ -22,33 +38,109 @@ header {
   font-size: 0.9rem;
 }
 
-/* Linhas do cabeçalho com menos espaço */
 .header-center {
   display: grid;
-  gap: 3px;              /* antes 6px → reduzido para aproximar linhas */
-  line-height: 1.2;      /* mais compacto */
+  gap: 3px;
+  line-height: 1.2;
 }
 
-/* Universidade Rovuma (mantém discreto) */
 .header-center p:first-child {
   font-size: 1rem;
   opacity: 0.9;
 }
 
-/* Faculdade — AGORA menor */
 .header-center h1 {
-  font-size: 1.3rem;       /* antes ~2rem → agora mais discreto */
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
-/* Revista Científica — AGORA um pouco maior */
 .header-center h2 {
-  font-size: 1.45rem;      /* ligeiramente maior */
+  font-size: 1.45rem;
   font-weight: 700;
 }
 
-/* Última frase discreta */
 .header-center p:last-child {
   font-size: 0.95rem;
   opacity: 0.9;
+}
+
+/* ===== MENU ===== */
+nav {
+  background: var(--azul-suave);
+}
+
+nav ul {
+  margin: 0;
+  padding: 14px 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+nav a.active {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ===== TABS ===== */
+.tab {
+  display: none;
+  padding: 40px 20px;
+}
+
+.tab.active {
+  display: block;
+}
+
+.secao-titulo {
+  font-size: 1.7rem;
+  color: var(--azul-escuro);
+  margin-bottom: 12px;
+}
+
+/* ===== BOTÕES ===== */
+.btn {
+  display: inline-block;
+  background: var(--azul-escuro);
+  color: white;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-right: 8px;
+}
+
+.btn:hover {
+  background: var(--azul-suave);
+}
+
+/* ===== GRID DOS CARDS ===== */
+.cards-grade {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #d9d9d9;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: #0a335f;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  margin-top: 40px;
 }
