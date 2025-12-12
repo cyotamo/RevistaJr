@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnLogin = document.querySelector(".login-btn");
   const modal = document.getElementById("modalLogin");
   const btnFechar = document.getElementById("btnFecharModal");
+  const btnOkLogin = document.getElementById("btnOkLogin");
 
   btnLogin.addEventListener("click", () => {
     modal.style.display = "flex";
@@ -31,6 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
   btnFechar.addEventListener("click", () => {
     modal.style.display = "none";
   });
+
+  if (btnOkLogin) {
+    btnOkLogin.addEventListener("click", () => {
+      modal.style.display = "none";
+      window.location.href = "gestor.html";
+    });
+  }
 
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
