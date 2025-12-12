@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área do Gestor - Revista Científica da Faculdade</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== CABEÇALHO ===== -->
+  <header>
+    <button class="login-btn">Logout</button>
+    <div class="header-center">
+      <p>Universidade Rovuma</p>
+      <h1>Faculdade de Ciências Económicas e Empresariais</h1>
+      <h2>Revista Científica da Faculdade</h2>
+      <p>Plataforma de divulgação de produção científica</p>
+    </div>
+  </header>
+
+  <!-- ===== MENU ===== -->
+  <nav>
+    <ul>
+      <li><a href="#" data-tab="novas">Novas Submissões</a></li>
+      <li><a href="#" data-tab="analise">Submissões em Análise</a></li>
+      <li><a href="#" data-tab="aprovadas">Submissões Aprovadas</a></li>
+      <li><a href="#" data-tab="reprovadas">Submissões Reprovadas</a></li>
+      <li><a href="#" data-tab="publicadas">Submissões Publicadas</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== SEÇÕES COMO TABS ===== -->
+  <main>
+
+    <section id="novas" class="tab active">
+      <h3 class="secao-titulo">Novas Submissões</h3>
+      <p>Lista de artigos recém-submetidos.</p>
+    </section>
+
+    <section id="analise" class="tab">
+      <h3 class="secao-titulo">Submissões em Análise</h3>
+      <p>Artigos actualmente em processo de avaliação.</p>
+    </section>
+
+    <section id="aprovadas" class="tab">
+      <h3 class="secao-titulo">Submissões Aprovadas</h3>
+      <p>Artigos aprovados para publicação.</p>
+    </section>
+
+    <section id="reprovadas" class="tab">
+      <h3 class="secao-titulo">Submissões Reprovadas</h3>
+      <p>Artigos rejeitados.</p>
+    </section>
+
+    <section id="publicadas" class="tab">
+      <h3 class="secao-titulo">Submissões Publicadas</h3>
+      <p>Artigos já publicados na revista.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2025 Revista Científica da Faculdade
+  </footer>
+
+  <!-- ===== MODAL LOGIN ===== -->
+  <div class="modal-overlay" id="modalLogin">
+    <div class="modal-box">
+      <h3>Iniciar Sessão</h3>
+
+      <label for="emailLogin">E-mail</label>
+      <input type="email" id="emailLogin" placeholder="nome@exemplo.com">
+
+      <label for="senhaLogin">Senha</label>
+      <input type="password" id="senhaLogin" placeholder="********">
+
+      <button id="btnOkLogin" class="btn">OK</button>
+      <button id="btnFecharModal" class="btn-fechar">Fechar</button>
+    </div>
+  </div>
+
+  <script src="gestor.js"></script>
+</body>
+</html>
