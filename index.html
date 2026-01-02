@@ -115,7 +115,12 @@
         <label>Anexar artigo (.doc ou .docx)</label>
         <input type="file" id="ficheiro" name="ficheiro" accept=".doc,.docx" required>
 
-        <button type="submit">Enviar</button>
+        <button type="button" class="btn-submeter" id="btnEnviar" onclick="enviarArtigo()">
+          <span class="btn-text">Enviar</span>
+          <span class="btn-spinner"></span>
+        </button>
+
+        <div id="mensagemSucesso" class="mensagem-sucesso" style="display:none;"></div>
 
       </form>
 
