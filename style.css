@@ -149,6 +149,46 @@ nav a.active {
   border-radius: 8px;
 }
 
+/* ===== TABELA SUBMISSÕES ===== */
+.tabela-submissoes {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background: #fff;
+}
+
+.tabela-submissoes th,
+.tabela-submissoes td {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.tabela-submissoes th {
+  background: #f4f6f9;
+  color: var(--azul-escuro);
+}
+
+.link-artigo {
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.link-artigo:hover {
+  opacity: 0.8;
+}
+
+.estado-tabela {
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+.btn-analisar {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+}
+
 /* ===== FOOTER ===== */
 footer {
   background: #0a335f;
