@@ -82,7 +82,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const leitor = new FileReader();
-      leitor.onload = () => resolve(String(leitor.result || ""));
+      leitor.onload = () => {
+        const resultado = String(leitor.result || "");
+        const base64 = resultado.includes(",")
+          ? resultado.split(",")[1]
+          : resultado;
+        resolve(base64);
+      };
       leitor.onerror = () => reject(leitor.error);
       leitor.readAsDataURL(ficheiro);
     });
@@ -99,27 +105,32 @@ document.addEventListener("DOMContentLoaded", () => {
       const ficheiro = form.querySelector("#ficheiro").files[0];
       const ficheiroBase64 = await ficheiroParaBase64(ficheiro);
 
-      const dados = {
-        nome: form.querySelector("#nome").value.trim(),
-        numero: form.querySelector("#numero").value.trim(),
-        curso: form.querySelector("#curso").value.trim(),
-        linha: form.querySelector("#linha").value.trim(),
-        autor1: form.querySelector("#autor1").value.trim(),
-        autor2: form.querySelector("#autor2").value.trim(),
-        autor3: form.querySelector("#autor3").value.trim(),
-        email: form.querySelector("#email").value.trim(),
-        contacto: form.querySelector("#contacto").value.trim(),
-        titulo: form.querySelector("#titulo").value.trim(),
-        ficheiroBase64,
-        ficheiroNome: ficheiro ? ficheiro.name : "",
-      };
+      const formData = new FormData();
+      const campos = [
+        "nome",
+        "numero",
+        "curso",
+        "linha",
+        "autor1",
+        "autor2",
+        "autor3",
+        "email",
+        "contacto",
+        "titulo",
+      ];
+
+      campos.forEach((campo) => {
+        const valor = form.querySelector(`#${campo}`).value.trim();
+        formData.append(campo, valor);
+      });
+
+      formData.append("ficheiroBase64", ficheiroBase64);
+      formData.append("ficheiroNome", ficheiro ? ficheiro.name : "");
+      formData.append("ficheiroTipo", ficheiro ? ficheiro.type : "");
 
       const response = await fetch(ENDPOINT_SUBMISSAO, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dados),
+        body: formData,
       });
 
       const resultado = await response.json();
