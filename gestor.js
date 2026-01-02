@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const autor = obterCampo(linha, 6, "autor1");
       const email = obterCampo(linha, 9, "email");
       const contacto = obterCampo(linha, 10, "contacto");
-      const linkArtigo = obterCampo(linha, 11, "link");
+      const linkArtigo = obterCampo(linha, 11, "artigo");
 
       tr.appendChild(criarCelula(String(index + 1)));
       tr.appendChild(criarCelula(formatarData(data)));
@@ -132,17 +132,25 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.appendChild(criarCelula(contacto));
 
       const celulaArtigo = document.createElement("td");
-      if (linkArtigo) {
+      const artigoUrl =
+        typeof linkArtigo === "string" ? linkArtigo.trim() : linkArtigo;
+      if (artigoUrl) {
         const link = document.createElement("a");
-        link.href = linkArtigo;
+        link.href = artigoUrl;
         link.target = "_blank";
         link.rel = "noopener";
         link.classList.add("link-artigo");
-        link.textContent = "📄";
-        link.title = "Abrir artigo (Word)";
+        link.title = "Abrir documento";
+
+        const icon = document.createElement("img");
+        icon.src = "icons/word.svg";
+        icon.alt = "Word";
+        icon.classList.add("icon-word");
+
+        link.appendChild(icon);
         celulaArtigo.appendChild(link);
       } else {
-        celulaArtigo.textContent = "—";
+        celulaArtigo.textContent = "Sem ficheiro";
       }
       tr.appendChild(celulaArtigo);
 
