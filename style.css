@@ -171,12 +171,22 @@ nav a.active {
 }
 
 .link-artigo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   font-size: 1.1rem;
   text-decoration: none;
 }
 
 .link-artigo:hover {
   opacity: 0.8;
+}
+
+.icon-word {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
 }
 
 .estado-tabela {
