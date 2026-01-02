@@ -97,7 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
       "Submissão",
       "Nome",
       "Curso",
-      "Autor",
       "E-mail",
       "Contacto",
       "Artigo",
@@ -118,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = obterCampo(linha, 0, "data");
       const nome = obterCampo(linha, 2, "nome");
       const curso = obterCampo(linha, 3, "curso");
-      const autor = obterCampo(linha, 6, "autor1");
       const email = obterCampo(linha, 9, "email");
       const contacto = obterCampo(linha, 10, "contacto");
       const linkArtigo = obterCampo(linha, 11, "artigo");
@@ -127,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.appendChild(criarCelula(formatarData(data)));
       tr.appendChild(criarCelula(nome));
       tr.appendChild(criarCelula(curso));
-      tr.appendChild(criarCelula(autor));
       tr.appendChild(criarCelula(email));
       tr.appendChild(criarCelula(contacto));
 
