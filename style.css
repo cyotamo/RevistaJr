@@ -194,7 +194,8 @@ nav a.active {
   font-weight: 600;
 }
 
-.btn-analisar {
+.btn-analisar,
+.btn-aprovar {
   position: relative;
   min-width: 110px;
   padding: 6px 14px;
@@ -205,12 +206,18 @@ nav a.active {
   cursor: pointer;
 }
 
-.btn-analisar:disabled {
+.btn-aprovar {
+  background: #16a34a;
+}
+
+.btn-analisar:disabled,
+.btn-aprovar:disabled {
   background: #9ca3af;
   cursor: not-allowed;
 }
 
-.btn-analisar .btn-spinner {
+.btn-analisar .btn-spinner,
+.btn-aprovar .btn-spinner {
   display: none;
   width: 16px;
   height: 16px;
@@ -220,11 +227,13 @@ nav a.active {
   animation: spin 0.8s linear infinite;
 }
 
-.btn-analisar.loading .btn-text {
+.btn-analisar.loading .btn-text,
+.btn-aprovar.loading .btn-text {
   display: none;
 }
 
-.btn-analisar.loading .btn-spinner {
+.btn-analisar.loading .btn-spinner,
+.btn-aprovar.loading .btn-spinner {
   display: inline-block;
 }
 

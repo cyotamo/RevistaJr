@@ -3,10 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".tab");
   const logoutButton = document.querySelector(".logout-btn");
   const novasTabelaContainer = document.getElementById("novasTabela");
+  const analiseTabelaContainer = document.getElementById("analiseTabela");
 
   const WEB_APP_URL =
     "https://script.google.com/macros/s/AKfycbyvj-DF7IYQh1fn9AFxQhiLLLGe1ssudIhUZzjigarcjyI3vc_z9-nG09sAFwMtDnwvXw/exec";
   const ENDPOINT_NOVAS_SUBMISSOES = `${WEB_APP_URL}?acao=novasSubmissoes`;
+  const ENDPOINT_SUBMISSOES_ANALISE = `${WEB_APP_URL}?acao=submissoesEmAnalise`;
 
   verificarAuth(user => {
     if (!user) {
@@ -78,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return celula;
   };
 
-  const criarTabelaNovasSubmissoes = (registos) => {
+  const criarTabelaSubmissoes = (registos, opcoesBotao) => {
     const tabela = document.createElement("table");
     tabela.classList.add("tabela-submissoes");
 
@@ -146,13 +148,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const celulaSituacao = document.createElement("td");
       const botao = document.createElement("button");
       botao.type = "button";
-      botao.className = "btn-analisar";
+      botao.className = opcoesBotao.classe;
       const rowIndex = linha?.rowIndex;
       botao.innerHTML = `
-        <span class="btn-text">Analisar</span>
+        <span class="btn-text">${opcoesBotao.texto}</span>
         <span class="btn-spinner"></span>
       `;
-      botao.addEventListener("click", () => onAnalisarClick(botao, rowIndex));
+      botao.addEventListener("click", () => opcoesBotao.onClick(botao, rowIndex));
       celulaSituacao.appendChild(botao);
       tr.appendChild(celulaSituacao);
 
@@ -163,26 +165,26 @@ document.addEventListener("DOMContentLoaded", () => {
     return tabela;
   };
 
-  const renderizarEstado = (mensagem) => {
-    if (!novasTabelaContainer) return;
-    novasTabelaContainer.innerHTML = "";
+  const renderizarEstado = (container, mensagem) => {
+    if (!container) return;
+    container.innerHTML = "";
     const aviso = document.createElement("p");
     aviso.classList.add("estado-tabela");
     aviso.textContent = mensagem;
-    novasTabelaContainer.appendChild(aviso);
+    container.appendChild(aviso);
   };
 
-  const renderTabela = (registos) => {
-    if (!novasTabelaContainer) return;
-    novasTabelaContainer.innerHTML = "";
+  const renderTabela = (container, registos, opcoesBotao) => {
+    if (!container) return;
+    container.innerHTML = "";
 
     if (!registos.length) {
-      renderizarEstado("Sem submissões para mostrar.");
+      renderizarEstado(container, "Sem submissões para mostrar.");
       return;
     }
 
-    const tabela = criarTabelaNovasSubmissoes(registos);
-    novasTabelaContainer.appendChild(tabela);
+    const tabela = criarTabelaSubmissoes(registos, opcoesBotao);
+    container.appendChild(tabela);
   };
 
   const onAnalisarClick = async (botao, rowIndex) => {
@@ -216,14 +218,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const onAprovarClick = async (botao, rowIndex) => {
+    if (botao.classList.contains("loading")) return;
+
+    botao.classList.add("loading");
+    botao.disabled = true;
+
+    try {
+      const dados = new FormData();
+      dados.append("acao", "marcarAprovado");
+      dados.append("rowIndex", rowIndex);
+
+      const res = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: dados,
+      });
+
+      const json = await res.json();
+
+      if (!json.sucesso) {
+        throw new Error(json.mensagem || "Erro ao aprovar");
+      }
+
+      botao.classList.remove("loading");
+      botao.disabled = true;
+    } catch (err) {
+      botao.classList.remove("loading");
+      botao.disabled = false;
+      alert("Erro ao aprovar submissão.");
+    }
+  };
+
   const carregarNovasSubmissoes = async () => {
     if (!novasTabelaContainer) return;
     if (!ENDPOINT_NOVAS_SUBMISSOES) {
-      renderizarEstado("Endpoint não configurado.");
+      renderizarEstado(novasTabelaContainer, "Endpoint não configurado.");
       return;
     }
 
-    renderizarEstado("A carregar submissões...");
+    renderizarEstado(novasTabelaContainer, "A carregar submissões...");
 
     try {
       const response = await fetch(ENDPOINT_NOVAS_SUBMISSOES, {
@@ -233,14 +266,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!payload.sucesso) {
         console.error("Erro ao carregar submissões");
-        renderizarEstado("Não foi possível carregar as submissões.");
+        renderizarEstado(novasTabelaContainer, "Não foi possível carregar as submissões.");
         return;
       }
 
-      renderTabela(payload.dados || []);
+      renderTabela(novasTabelaContainer, payload.dados || [], {
+        classe: "btn-analisar",
+        texto: "Analisar",
+        onClick: onAnalisarClick,
+      });
     } catch (erro) {
       console.error("Erro ao carregar novas submissões:", erro);
-      renderizarEstado("Não foi possível carregar as submissões.");
+      renderizarEstado(novasTabelaContainer, "Não foi possível carregar as submissões.");
+    }
+  };
+
+  const carregarSubmissoesEmAnalise = async () => {
+    if (!analiseTabelaContainer) return;
+    if (!ENDPOINT_SUBMISSOES_ANALISE) {
+      renderizarEstado(analiseTabelaContainer, "Endpoint não configurado.");
+      return;
+    }
+
+    renderizarEstado(analiseTabelaContainer, "A carregar submissões...");
+
+    try {
+      const response = await fetch(ENDPOINT_SUBMISSOES_ANALISE, {
+        cache: "no-store",
+      });
+      const payload = await response.json();
+
+      if (!payload.sucesso) {
+        console.error("Erro ao carregar submissões em análise");
+        renderizarEstado(analiseTabelaContainer, "Não foi possível carregar as submissões.");
+        return;
+      }
+
+      renderTabela(analiseTabelaContainer, payload.dados || [], {
+        classe: "btn-aprovar",
+        texto: "Aprovar",
+        onClick: onAprovarClick,
+      });
+    } catch (erro) {
+      console.error("Erro ao carregar submissões em análise:", erro);
+      renderizarEstado(analiseTabelaContainer, "Não foi possível carregar as submissões.");
     }
   };
 
@@ -258,6 +327,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (target === "novas") {
         carregarNovasSubmissoes();
+      }
+
+      if (target === "analise") {
+        carregarSubmissoesEmAnalise();
       }
     });
   });
