@@ -5,8 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!form) return;
 
-  const ENDPOINT_CUR_LINHA = "";
-  const ENDPOINT_SUBMISSAO = "";
+  const WEB_APP_URL =
+    "https://script.google.com/macros/s/AKfycbxXWxfSxdW6anO1T60w5_KPFaTalETYAjggz-46W8fBwmouZfhqZa_fSo7DTqHn-sRCUA/exec";
+  const ENDPOINT_CUR_LINHA = `${WEB_APP_URL}?acao=curLinha`;
+  const ENDPOINT_SUBMISSAO = WEB_APP_URL;
 
   const normalizarLinha = (linha) => String(linha || "").trim();
 
