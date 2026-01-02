@@ -22,14 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const extrairRegistos = (payload) => {
-    if (Array.isArray(payload)) return payload;
-    if (payload && Array.isArray(payload.dados)) return payload.dados;
-    if (payload && Array.isArray(payload.data)) return payload.data;
-    if (payload && Array.isArray(payload.values)) return payload.values;
-    return [];
-  };
-
   const converterData = (valor) => {
     if (!valor) return null;
     if (valor instanceof Date && !Number.isNaN(valor.getTime())) return valor;
@@ -155,12 +147,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const botao = document.createElement("button");
       botao.type = "button";
       botao.className = "btn-analisar";
-      botao.dataset.rowId = linha?.rowId || "";
+      const rowIndex = linha?.rowIndex;
       botao.innerHTML = `
         <span class="btn-text">Analisar</span>
         <span class="btn-spinner"></span>
       `;
-      botao.addEventListener("click", () => onAnalisarClick(botao));
+      botao.addEventListener("click", () => onAnalisarClick(botao, rowIndex));
       celulaSituacao.appendChild(botao);
       tr.appendChild(celulaSituacao);
 
@@ -180,16 +172,48 @@ document.addEventListener("DOMContentLoaded", () => {
     novasTabelaContainer.appendChild(aviso);
   };
 
-  const onAnalisarClick = (botao) => {
+  const renderTabela = (registos) => {
+    if (!novasTabelaContainer) return;
+    novasTabelaContainer.innerHTML = "";
+
+    if (!registos.length) {
+      renderizarEstado("Sem submissões para mostrar.");
+      return;
+    }
+
+    const tabela = criarTabelaNovasSubmissoes(registos);
+    novasTabelaContainer.appendChild(tabela);
+  };
+
+  const onAnalisarClick = async (botao, rowIndex) => {
     if (botao.classList.contains("loading")) return;
 
     botao.classList.add("loading");
     botao.disabled = true;
 
-    setTimeout(() => {
+    try {
+      const dados = new FormData();
+      dados.append("acao", "marcarAnalisado");
+      dados.append("rowIndex", rowIndex);
+
+      const res = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: dados,
+      });
+
+      const json = await res.json();
+
+      if (!json.sucesso) {
+        throw new Error(json.mensagem || "Erro ao analisar");
+      }
+
       botao.classList.remove("loading");
       botao.disabled = true;
-    }, 1000);
+    } catch (err) {
+      botao.classList.remove("loading");
+      botao.disabled = false;
+      alert("Erro ao marcar como analisado.");
+    }
   };
 
   const carregarNovasSubmissoes = async () => {
@@ -206,29 +230,14 @@ document.addEventListener("DOMContentLoaded", () => {
         cache: "no-store",
       });
       const payload = await response.json();
-      const registos = extrairRegistos(payload);
 
-      novasTabelaContainer.innerHTML = "";
-
-      if (!registos.length) {
-        renderizarEstado("Sem submissões para mostrar.");
+      if (!payload.sucesso) {
+        console.error("Erro ao carregar submissões");
+        renderizarEstado("Não foi possível carregar as submissões.");
         return;
       }
 
-      const dadosFiltrados = registos.filter((linha) => {
-        if (Array.isArray(linha)) {
-          return !obterCampo(linha, 12, "situacao");
-        }
-        return !linha?.situacao;
-      });
-
-      if (!dadosFiltrados.length) {
-        renderizarEstado("Sem submissões para mostrar.");
-        return;
-      }
-
-      const tabela = criarTabelaNovasSubmissoes(dadosFiltrados);
-      novasTabelaContainer.appendChild(tabela);
+      renderTabela(payload.dados || []);
     } catch (erro) {
       console.error("Erro ao carregar novas submissões:", erro);
       renderizarEstado("Não foi possível carregar as submissões.");
