@@ -4,11 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutButton = document.querySelector(".logout-btn");
   const novasTabelaContainer = document.getElementById("novasTabela");
   const analiseTabelaContainer = document.getElementById("analiseTabela");
+  const aprovadasTabelaContainer = document.getElementById("aprovadasTabela");
 
   const WEB_APP_URL =
     "https://script.google.com/macros/s/AKfycbyvj-DF7IYQh1fn9AFxQhiLLLGe1ssudIhUZzjigarcjyI3vc_z9-nG09sAFwMtDnwvXw/exec";
   const ENDPOINT_NOVAS_SUBMISSOES = `${WEB_APP_URL}?acao=novasSubmissoes`;
   const ENDPOINT_SUBMISSOES_ANALISE = `${WEB_APP_URL}?acao=submissoesEmAnalise`;
+  const ENDPOINT_SUBMISSOES_APROVADAS = `${WEB_APP_URL}?acao=submissoesAprovadas`;
 
   verificarAuth(user => {
     if (!user) {
@@ -249,6 +251,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const onPublicarClick = async (botao, rowIndex) => {
+    if (botao.classList.contains("loading")) return;
+
+    botao.classList.add("loading");
+    botao.disabled = true;
+
+    try {
+      const dados = new FormData();
+      dados.append("acao", "publicar");
+      dados.append("rowIndex", rowIndex);
+
+      const res = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: dados,
+      });
+
+      const json = await res.json();
+
+      if (!json.sucesso) {
+        throw new Error(json.mensagem || "Erro ao publicar");
+      }
+
+      botao.classList.remove("loading");
+      botao.disabled = true;
+
+      await carregarSubmissoesAprovadas();
+    } catch (err) {
+      botao.classList.remove("loading");
+      botao.disabled = false;
+      alert("Erro ao publicar submissão.");
+    }
+  };
+
   const carregarNovasSubmissoes = async () => {
     if (!novasTabelaContainer) return;
     if (!ENDPOINT_NOVAS_SUBMISSOES) {
@@ -313,6 +348,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const carregarSubmissoesAprovadas = async () => {
+    if (!aprovadasTabelaContainer) return;
+    if (!ENDPOINT_SUBMISSOES_APROVADAS) {
+      renderizarEstado(aprovadasTabelaContainer, "Endpoint não configurado.");
+      return;
+    }
+
+    renderizarEstado(aprovadasTabelaContainer, "A carregar submissões...");
+
+    try {
+      const response = await fetch(ENDPOINT_SUBMISSOES_APROVADAS, {
+        cache: "no-store",
+      });
+      const payload = await response.json();
+
+      if (!payload.sucesso) {
+        console.error("Erro ao carregar submissões aprovadas");
+        renderizarEstado(aprovadasTabelaContainer, "Não foi possível carregar as submissões.");
+        return;
+      }
+
+      renderTabela(aprovadasTabelaContainer, payload.dados || [], {
+        classe: "btn-aprovar",
+        texto: "Publicar",
+        onClick: onPublicarClick,
+      });
+    } catch (erro) {
+      console.error("Erro ao carregar submissões aprovadas:", erro);
+      renderizarEstado(aprovadasTabelaContainer, "Não foi possível carregar as submissões.");
+    }
+  };
+
   tabs.forEach(tab => {
     tab.addEventListener("click", e => {
       e.preventDefault();
@@ -331,6 +398,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (target === "analise") {
         carregarSubmissoesEmAnalise();
+      }
+
+      if (target === "aprovadas") {
+        carregarSubmissoesAprovadas();
       }
     });
   });
