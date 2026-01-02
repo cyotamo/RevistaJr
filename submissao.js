@@ -14,8 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const extrairLinhas = (payload) => {
     if (Array.isArray(payload)) return payload;
-    if (payload && Array.isArray(payload.data)) return payload.data;
-    if (payload && Array.isArray(payload.values)) return payload.values;
+    if (Array.isArray(payload.dados)) return payload.dados;
+    if (Array.isArray(payload.data)) return payload.data;
+    if (Array.isArray(payload.values)) return payload.values;
     return [];
   };
 
