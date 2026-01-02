@@ -195,8 +195,43 @@ nav a.active {
 }
 
 .btn-analisar {
-  padding: 6px 12px;
-  font-size: 0.9rem;
+  position: relative;
+  min-width: 110px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-analisar:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.btn-analisar .btn-spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.btn-analisar.loading .btn-text {
+  display: none;
+}
+
+.btn-analisar.loading .btn-spinner {
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ===== FOOTER ===== */
