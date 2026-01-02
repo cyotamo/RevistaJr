@@ -13,12 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const normalizarLinha = (linha) => String(linha || "").trim();
 
   const extrairLinhas = (payload) => {
-    if (Array.isArray(payload)) return payload;
-    if (Array.isArray(payload.dados)) return payload.dados;
-    if (Array.isArray(payload.data)) return payload.data;
-    if (Array.isArray(payload.values)) return payload.values;
-    return [];
-  };
+   if (Array.isArray(payload)) return payload;
+   if (payload && Array.isArray(payload.dados)) return payload.dados; // ← ESTA LINHA FALTAVA
+   if (payload && Array.isArray(payload.data)) return payload.data;
+   if (payload && Array.isArray(payload.values)) return payload.values;
+   return [];
+ };
+
 
   const limparSelect = (select, placeholder) => {
     select.innerHTML = "";
