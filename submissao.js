@@ -53,9 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       cursoSelect.addEventListener("change", () => {
         const cursoSelecionado = normalizarLinha(cursoSelect.value);
-        const linhasFiltradas = linhas
-          .filter(([curso]) => curso === cursoSelecionado)
-          .map(([, linha]) => linha);
+        const linhasFiltradas = [
+          ...new Set(
+            linhas
+              .filter(([curso]) => curso === cursoSelecionado)
+              .map(([, linha]) => linha)
+          ),
+        ];
 
         limparSelect(linhaSelect, "— Seleccione a linha de pesquisa —");
         linhasFiltradas.forEach((linha) => {
