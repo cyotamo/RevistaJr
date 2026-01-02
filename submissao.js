@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!form) return;
 
   const WEB_APP_URL =
-    "https://script.google.com/macros/s/AKfycby2UVD2U8q9emIvd9Jh8UzODT_LBCQr25kslqc4uddfsIySkjQHNlFsxEPg-cUsSX1kvg/exec";
+    "https://script.google.com/macros/s/AKfycbyvj-DF7IYQh1fn9AFxQhiLLLGe1ssudIhUZzjigarcjyI3vc_z9-nG09sAFwMtDnwvXw/exec";
   const ENDPOINT_CUR_LINHA = `${WEB_APP_URL}?acao=curLinha`;
   const ENDPOINT_SUBMISSAO = WEB_APP_URL;
 
