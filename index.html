@@ -79,38 +79,41 @@
         <h3>Submeta aqui o seu artigo</h3>
 
         <label>Nome</label>
-        <input type="text" name="nome" required>
+        <input type="text" id="nome" name="nome" required>
 
         <label>Número de Estudante</label>
-        <input type="text" name="numero" placeholder="XX.XXXX.XXXX" required>
+        <input type="text" id="numero" name="numero" placeholder="XX.XXXX.XXXX" required>
 
         <label>Curso</label>
-        <select name="curso" id="cursoSelect" required>
+        <select name="curso" id="curso" required>
           <option value="">— Seleccione o curso —</option>
         </select>
 
         <label>Linha de Pesquisa</label>
-        <select name="linha" id="linhaSelect" required>
+        <select name="linha" id="linha" required>
           <option value="">— Seleccione a linha de pesquisa —</option>
         </select>
 
+        <label>Título</label>
+        <input type="text" id="titulo" name="titulo" required>
+
         <label>Autor 1</label>
-        <input type="text" name="autor1" required>
+        <input type="text" id="autor1" name="autor1" required>
 
         <label>Autor 2</label>
-        <input type="text" name="autor2">
+        <input type="text" id="autor2" name="autor2">
 
         <label>Autor 3</label>
-        <input type="text" name="autor3">
+        <input type="text" id="autor3" name="autor3">
 
         <label>E-mail</label>
-        <input type="email" name="email" required>
+        <input type="email" id="email" name="email" required>
 
         <label>Contacto WhatsApp</label>
-        <input type="tel" name="contacto" required>
+        <input type="tel" id="contacto" name="contacto" required>
 
         <label>Anexar artigo (.doc ou .docx)</label>
-        <input type="file" name="ficheiro" accept=".doc,.docx" required>
+        <input type="file" id="ficheiro" name="ficheiro" accept=".doc,.docx" required>
 
         <button type="submit">Enviar</button>
 
