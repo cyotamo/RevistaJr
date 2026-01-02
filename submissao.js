@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("formNovaSubmissao");
   const cursoSelect = document.getElementById("curso");
   const linhaSelect = document.getElementById("linha");
+  const botao = document.getElementById("btnEnviar");
+  const msg = document.getElementById("mensagemSucesso");
 
   if (!form) return;
 
@@ -93,12 +95,20 @@ document.addEventListener("DOMContentLoaded", () => {
       leitor.readAsDataURL(ficheiro);
     });
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
+  const enviarArtigo = async () => {
     if (!ENDPOINT_SUBMISSAO) {
       alert("Envio não configurado. Aguarde a definição do endpoint.");
       return;
+    }
+
+    if (!botao) {
+      return;
+    }
+
+    botao.classList.add("btn-loading");
+    botao.disabled = true;
+    if (msg) {
+      msg.style.display = "none";
     }
 
     try {
@@ -136,17 +146,31 @@ document.addEventListener("DOMContentLoaded", () => {
       const resultado = await response.json();
 
       if (resultado && resultado.sucesso === true) {
-        alert("Submissão enviada com sucesso.");
         form.reset();
         limparSelect(linhaSelect, "— Seleccione a linha de pesquisa —");
+        if (msg) {
+          msg.textContent =
+            "O seu artigo foi enviado com sucesso, aguarde o contacto.";
+          msg.style.display = "block";
+        }
       } else {
         alert("Não foi possível enviar a submissão.");
       }
     } catch (erro) {
       console.error("Erro ao enviar submissão:", erro);
       alert("Ocorreu um erro ao enviar a submissão.");
+    } finally {
+      botao.classList.remove("btn-loading");
+      botao.disabled = false;
     }
+  };
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    enviarArtigo();
   });
+
+  window.enviarArtigo = enviarArtigo;
 
   carregarCursosELinhas();
 });
