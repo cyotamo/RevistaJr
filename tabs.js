@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const WEB_APP_URL =
+    "https://script.google.com/macros/s/AKfycbyvj-DF7IYQh1fn9AFxQhiLLLGe1ssudIhUZzjigarcjyI3vc_z9-nG09sAFwMtDnwvXw/exec";
+  const ENDPOINT_ULTIMA_EDICAO = `${WEB_APP_URL}?acao=ultEdicao`;
+
+  const txtUltimaEdicao = document.getElementById("txtUltimaEdicao");
+  const editorialConteudo = document.getElementById("editorialConteudo");
+  const listaArtigos = document.getElementById("listaArtigos");
 
   // ===== LÓGICA DAS TABS =====
   const tabs = document.querySelectorAll("nav a");
@@ -14,10 +21,104 @@ document.addEventListener("DOMContentLoaded", () => {
 
       tab.classList.add("active");
       document.getElementById(target).classList.add("active");
+
+      if (target === "inicio") {
+        carregarInicio();
+      }
     });
   });
 
   document.querySelector('a[data-tab="inicio"]').classList.add("active");
+
+  const limparContainer = (container) => {
+    if (container) {
+      container.textContent = "";
+    }
+  };
+
+  const criarLinkBaixar = (link) => {
+    if (!link) return null;
+    const botao = document.createElement("a");
+    botao.textContent = "Baixar";
+    botao.href = link;
+    botao.target = "_blank";
+    botao.rel = "noopener";
+    return botao;
+  };
+
+  const renderizarUltimaEdicao = (dados) => {
+    if (!txtUltimaEdicao) return;
+    txtUltimaEdicao.textContent = `Última Edição: ${dados.ultimaEdicao}`;
+  };
+
+  const renderizarEditorial = (editorial) => {
+    if (!editorialConteudo) return;
+    limparContainer(editorialConteudo);
+
+    const item = document.createElement("div");
+    const texto = document.createElement("span");
+    const autor = editorial.autor ?? "";
+    const titulo = editorial.titulo ?? "";
+    texto.textContent = `${autor} – ${titulo}`;
+    item.appendChild(texto);
+
+    const botao = criarLinkBaixar(editorial.link);
+    if (botao) {
+      item.appendChild(botao);
+    }
+
+    editorialConteudo.appendChild(item);
+  };
+
+  const renderizarArtigos = (artigos) => {
+    if (!listaArtigos) return;
+    limparContainer(listaArtigos);
+
+    artigos.forEach((artigo) => {
+      const item = document.createElement("div");
+      const texto = document.createElement("span");
+      const autor = artigo.autor ?? "";
+      const titulo = artigo.titulo ?? "";
+      texto.textContent = `${autor} – ${titulo}`;
+      item.appendChild(texto);
+
+      const botao = criarLinkBaixar(artigo.link);
+      if (botao) {
+        item.appendChild(botao);
+      }
+
+      listaArtigos.appendChild(item);
+    });
+  };
+
+  const carregarInicio = async () => {
+    limparContainer(editorialConteudo);
+    limparContainer(listaArtigos);
+
+    try {
+      const response = await fetch(ENDPOINT_ULTIMA_EDICAO, {
+        cache: "no-store",
+      });
+      const payload = await response.json();
+
+      if (!payload || payload.sucesso === false) {
+        console.error("Erro ao carregar última edição.");
+        return;
+      }
+
+      const dados = payload.dados;
+      if (!dados) {
+        console.error("Resposta sem dados da última edição.");
+        return;
+      }
+
+      renderizarUltimaEdicao(dados);
+      renderizarEditorial(dados.editorial || {});
+      renderizarArtigos(Array.isArray(dados.artigos) ? dados.artigos : []);
+    } catch (erro) {
+      console.error("Erro ao carregar última edição:", erro);
+    }
+  };
 
   // ===== LÓGICA DO MODAL LOGIN =====
   const btnLogin = document.querySelector(".login-btn");
@@ -54,4 +155,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  carregarInicio();
 });
