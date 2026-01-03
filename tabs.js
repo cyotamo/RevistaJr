@@ -39,11 +39,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const criarLinkBaixar = (link) => {
     if (!link) return null;
     const botao = document.createElement("a");
-    botao.textContent = "Baixar";
+    botao.textContent = "PDF";
     botao.href = link;
     botao.target = "_blank";
     botao.rel = "noopener";
+    botao.classList.add("btn", "btn-pdf");
     return botao;
+  };
+
+  const criarBlocoArtigo = ({ titulo, autor, link }) => {
+    const item = document.createElement("div");
+    item.classList.add("artigo-bloco");
+
+    const tituloElemento = document.createElement("h4");
+    tituloElemento.classList.add("artigo-titulo");
+    tituloElemento.textContent = titulo ?? "";
+    item.appendChild(tituloElemento);
+
+    const autorElemento = document.createElement("p");
+    autorElemento.classList.add("artigo-autores");
+    autorElemento.textContent = autor ?? "";
+    item.appendChild(autorElemento);
+
+    const botao = criarLinkBaixar(link);
+    if (botao) {
+      item.appendChild(botao);
+    }
+
+    return item;
   };
 
   const renderizarUltimaEdicao = (dados) => {
@@ -55,17 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!editorialConteudo) return;
     limparContainer(editorialConteudo);
 
-    const item = document.createElement("div");
-    const texto = document.createElement("span");
-    const autor = editorial.autor ?? "";
-    const titulo = editorial.titulo ?? "";
-    texto.textContent = `${autor} – ${titulo}`;
-    item.appendChild(texto);
-
-    const botao = criarLinkBaixar(editorial.link);
-    if (botao) {
-      item.appendChild(botao);
-    }
+    const item = criarBlocoArtigo({
+      titulo: editorial.titulo,
+      autor: editorial.autor,
+      link: editorial.link,
+    });
 
     editorialConteudo.appendChild(item);
   };
@@ -75,17 +92,11 @@ document.addEventListener("DOMContentLoaded", () => {
     limparContainer(listaArtigos);
 
     artigos.forEach((artigo) => {
-      const item = document.createElement("div");
-      const texto = document.createElement("span");
-      const autor = artigo.autor ?? "";
-      const titulo = artigo.titulo ?? "";
-      texto.textContent = `${autor} – ${titulo}`;
-      item.appendChild(texto);
-
-      const botao = criarLinkBaixar(artigo.link);
-      if (botao) {
-        item.appendChild(botao);
-      }
+      const item = criarBlocoArtigo({
+        titulo: artigo.titulo,
+        autor: artigo.autor,
+        link: artigo.link,
+      });
 
       listaArtigos.appendChild(item);
     });
