@@ -134,6 +134,25 @@ nav a.active {
   background: var(--azul-suave);
 }
 
+.artigo-bloco {
+  margin-bottom: 24px;
+}
+
+.artigo-titulo {
+  color: #0b4da2;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.artigo-autores {
+  margin: 0 0 8px;
+  color: #333;
+}
+
+.btn-pdf {
+  display: inline-block;
+}
+
 /* ===== GRID DOS CARDS ===== */
 .cards-grade {
   display: grid;
