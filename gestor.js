@@ -5,12 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const novasTabelaContainer = document.getElementById("novasTabela");
   const analiseTabelaContainer = document.getElementById("analiseTabela");
   const aprovadasTabelaContainer = document.getElementById("aprovadasTabela");
+  const publicadasTabelaContainer = document.getElementById("publicadasTabela");
 
   const WEB_APP_URL =
     "https://script.google.com/macros/s/AKfycbyvj-DF7IYQh1fn9AFxQhiLLLGe1ssudIhUZzjigarcjyI3vc_z9-nG09sAFwMtDnwvXw/exec";
   const ENDPOINT_NOVAS_SUBMISSOES = `${WEB_APP_URL}?acao=novasSubmissoes`;
   const ENDPOINT_SUBMISSOES_ANALISE = `${WEB_APP_URL}?acao=submissoesEmAnalise`;
   const ENDPOINT_SUBMISSOES_APROVADAS = `${WEB_APP_URL}?acao=submissoesAprovadas`;
+  const ENDPOINT_SUBMISSOES_PUBLICADAS = `${WEB_APP_URL}?acao=submissoesPublicadas`;
 
   verificarAuth(user => {
     if (!user) {
@@ -186,6 +188,95 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const tabela = criarTabelaSubmissoes(registos, opcoesBotao);
+    container.appendChild(tabela);
+  };
+
+  const criarTabelaPublicadas = (registos) => {
+    const tabela = document.createElement("table");
+    tabela.classList.add("tabela-submissoes");
+
+    const thead = document.createElement("thead");
+    const cabecalho = document.createElement("tr");
+    [
+      "Ord",
+      "Submissão",
+      "Nome",
+      "Curso",
+      "E-mail",
+      "Contacto",
+      "Artigo",
+      "Situação",
+    ].forEach((titulo) => {
+      const th = document.createElement("th");
+      th.textContent = titulo;
+      cabecalho.appendChild(th);
+    });
+    thead.appendChild(cabecalho);
+    tabela.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+
+    registos.forEach((linha, index) => {
+      const tr = document.createElement("tr");
+
+      const data = obterCampo(linha, 0, "data");
+      const nome = obterCampo(linha, 2, "nome");
+      const curso = obterCampo(linha, 3, "curso");
+      const email = obterCampo(linha, 9, "email");
+      const contacto = obterCampo(linha, 10, "contacto");
+      const linkArtigo = obterCampo(linha, 11, "artigo");
+
+      tr.appendChild(criarCelula(String(index + 1)));
+      tr.appendChild(criarCelula(formatarData(data)));
+      tr.appendChild(criarCelula(nome));
+      tr.appendChild(criarCelula(curso));
+      tr.appendChild(criarCelula(email));
+      tr.appendChild(criarCelula(contacto));
+
+      const celulaArtigo = document.createElement("td");
+      const artigoUrl =
+        typeof linkArtigo === "string" ? linkArtigo.trim() : linkArtigo;
+      if (artigoUrl) {
+        const link = document.createElement("a");
+        link.href = artigoUrl;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.classList.add("link-artigo");
+        link.title = "Abrir documento";
+
+        const icon = document.createElement("img");
+        icon.src = "icons/word.svg";
+        icon.alt = "Word";
+        icon.classList.add("icon-word");
+
+        link.appendChild(icon);
+        celulaArtigo.appendChild(link);
+      } else {
+        celulaArtigo.textContent = "Sem ficheiro";
+      }
+      tr.appendChild(celulaArtigo);
+
+      const celulaSituacao = document.createElement("td");
+      celulaSituacao.textContent = "—";
+      tr.appendChild(celulaSituacao);
+
+      tbody.appendChild(tr);
+    });
+
+    tabela.appendChild(tbody);
+    return tabela;
+  };
+
+  const renderTabelaPublicadas = (container, registos) => {
+    if (!container) return;
+    container.innerHTML = "";
+
+    if (!registos.length) {
+      renderizarEstado(container, "Sem submissões para mostrar.");
+      return;
+    }
+
+    const tabela = criarTabelaPublicadas(registos);
     container.appendChild(tabela);
   };
 
@@ -380,6 +471,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const carregarSubmissoesPublicadas = async () => {
+    if (!publicadasTabelaContainer) return;
+    if (!ENDPOINT_SUBMISSOES_PUBLICADAS) {
+      renderizarEstado(publicadasTabelaContainer, "Endpoint não configurado.");
+      return;
+    }
+
+    renderizarEstado(publicadasTabelaContainer, "A carregar submissões...");
+
+    try {
+      const response = await fetch(ENDPOINT_SUBMISSOES_PUBLICADAS, {
+        cache: "no-store",
+      });
+      const payload = await response.json();
+
+      if (!payload.sucesso) {
+        console.error("Erro ao carregar submissões publicadas");
+        renderizarEstado(publicadasTabelaContainer, "Não foi possível carregar as submissões.");
+        return;
+      }
+
+      renderTabelaPublicadas(publicadasTabelaContainer, payload.dados || []);
+    } catch (erro) {
+      console.error("Erro ao carregar submissões publicadas:", erro);
+      renderizarEstado(publicadasTabelaContainer, "Não foi possível carregar as submissões.");
+    }
+  };
+
   tabs.forEach(tab => {
     tab.addEventListener("click", e => {
       e.preventDefault();
@@ -402,6 +521,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (target === "aprovadas") {
         carregarSubmissoesAprovadas();
+      }
+
+      if (target === "publicadas") {
+        carregarSubmissoesPublicadas();
       }
     });
   });
