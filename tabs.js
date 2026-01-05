@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const txtUltimaEdicao = document.getElementById("txtUltimaEdicao");
   const editorialConteudo = document.getElementById("editorialConteudo");
   const listaArtigos = document.getElementById("listaArtigos");
+  const conteudoSobre = document.getElementById("conteudoSobre");
 
   // ===== LÓGICA DAS TABS =====
   const tabs = document.querySelectorAll("nav a");
@@ -24,6 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (target === "inicio") {
         carregarInicio();
+      } else if (target === "sobre") {
+        carregarSobre();
       }
     });
   });
@@ -99,6 +102,27 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       listaArtigos.appendChild(item);
+    });
+  };
+
+  const carregarSobre = () => {
+    if (!conteudoSobre) return;
+    limparContainer(conteudoSobre);
+
+    const titulo = document.createElement("h3");
+    titulo.classList.add("secao-titulo");
+    titulo.textContent = "Sobre a Plataforma";
+    conteudoSobre.appendChild(titulo);
+
+    const paragrafos = [
+      "Esta plataforma é um espaço institucional destinado à divulgação e valorização da produção científica desenvolvida na Faculdade. Tem como foco principal os Trabalhos de Conclusão de Curso (TCC), integrando igualmente artigos científicos, projectos de investigação, relatórios técnicos, monografias e outras produções académicas relevantes.",
+      "O seu objectivo é promover a investigação científica, facilitar o acesso ao conhecimento produzido e reforçar a visibilidade do trabalho académico de estudantes, docentes e investigadores, contribuindo para o fortalecimento da qualidade científica e da memória institucional da Faculdade.",
+    ];
+
+    paragrafos.forEach((texto) => {
+      const paragrafo = document.createElement("p");
+      paragrafo.textContent = texto;
+      conteudoSobre.appendChild(paragrafo);
     });
   };
 
