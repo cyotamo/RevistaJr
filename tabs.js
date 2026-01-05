@@ -1,7 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const WEB_APP_URL =
-    "https://script.google.com/macros/s/AKfycbyvj-DF7IYQh1fn9AFxQhiLLLGe1ssudIhUZzjigarcjyI3vc_z9-nG09sAFwMtDnwvXw/exec";
-  const ENDPOINT_ULTIMA_EDICAO = `${WEB_APP_URL}?acao=ultEdicao`;
+  const DADOS_INICIO = {
+    ultimaEdicao: "2026/1",
+    editorial: {
+      titulo: "Editorial",
+      pdf: "https://exemplo.com/editorial.pdf",
+    },
+    artigos: [
+      {
+        titulo: "Título do Artigo Exemplo 1",
+        autor: "Nome do Autor 1",
+        pdf: "https://exemplo.com/artigo1.pdf",
+      },
+      {
+        titulo: "Título do Artigo Exemplo 2",
+        autor: "Nome do Autor 2",
+        pdf: "https://exemplo.com/artigo2.pdf",
+      },
+      {
+        titulo: "Título do Artigo Exemplo 3",
+        autor: "Nome do Autor 3",
+        pdf: "https://exemplo.com/artigo3.pdf",
+      },
+    ],
+  };
 
   const txtUltimaEdicao = document.getElementById("txtUltimaEdicao");
   const editorialConteudo = document.getElementById("editorialConteudo");
@@ -126,32 +147,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const carregarInicio = async () => {
+  const carregarInicio = () => {
     limparContainer(editorialConteudo);
     limparContainer(listaArtigos);
 
-    try {
-      const response = await fetch(ENDPOINT_ULTIMA_EDICAO, {
-        cache: "no-store",
+    if (txtUltimaEdicao) {
+      txtUltimaEdicao.textContent = `Última Edição: ${DADOS_INICIO.ultimaEdicao}`;
+    }
+
+    if (editorialConteudo && DADOS_INICIO.editorial) {
+      const editorial = criarBlocoArtigo({
+        titulo: DADOS_INICIO.editorial.titulo,
+        autor: DADOS_INICIO.editorial.autor,
+        link: DADOS_INICIO.editorial.pdf,
       });
-      const payload = await response.json();
+      editorialConteudo.appendChild(editorial);
+    }
 
-      if (!payload || payload.sucesso === false) {
-        console.error("Erro ao carregar última edição.");
-        return;
-      }
-
-      const dados = payload.dados;
-      if (!dados) {
-        console.error("Resposta sem dados da última edição.");
-        return;
-      }
-
-      renderizarUltimaEdicao(dados);
-      renderizarEditorial(dados.editorial || {});
-      renderizarArtigos(Array.isArray(dados.artigos) ? dados.artigos : []);
-    } catch (erro) {
-      console.error("Erro ao carregar última edição:", erro);
+    if (listaArtigos) {
+      DADOS_INICIO.artigos.forEach((artigo) => {
+        const item = criarBlocoArtigo({
+          titulo: artigo.titulo,
+          autor: artigo.autor,
+          link: artigo.pdf,
+        });
+        listaArtigos.appendChild(item);
+      });
     }
   };
 
