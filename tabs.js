@@ -115,15 +115,20 @@ document.addEventListener("DOMContentLoaded", () => {
     tituloElemento.textContent = titulo ?? "";
     item.appendChild(tituloElemento);
 
-    const autorElemento = document.createElement("p");
+    const meta = document.createElement("div");
+    meta.classList.add("artigo-meta");
+
+    const autorElemento = document.createElement("span");
     autorElemento.classList.add("artigo-autores");
     autorElemento.textContent = autor ?? "";
-    item.appendChild(autorElemento);
+    meta.appendChild(autorElemento);
 
     const botao = criarLinkBaixar(link);
     if (botao) {
-      item.appendChild(botao);
+      meta.appendChild(botao);
     }
+
+    item.appendChild(meta);
 
     return item;
   };
