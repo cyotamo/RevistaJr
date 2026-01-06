@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ECONOGEST 360</title>
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Revista FACEE – Produção Científica">
+  <meta property="og:description" content="Plataforma académica de divulgação de pesquisas científicas, artigos e trabalhos de conclusão de curso da FACEE.">
+  <meta property="og:image" content="https://revista-facee.web.app/icon.png">
+  <meta property="og:url" content="https://revista-facee.web.app/">
+  <meta property="og:site_name" content="Revista FACEE">
+
+  <!-- Twitter (opcional, mas recomendado) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Revista FACEE – Produção Científica">
+  <meta name="twitter:description" content="Divulgação científica da Faculdade de Ciências Económicas e Empresariais.">
+  <meta name="twitter:image" content="https://revista-facee.web.app/icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0a3d62">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="icon.png">
 </head>
@@ -166,5 +181,10 @@
 
   <script type="module" src="firebase-config.js"></script>
   <script src="tabs.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js");
+    }
+  </script>
 </body>
 </html>
