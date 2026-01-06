@@ -48,6 +48,10 @@ header {
   text-align: center;
 }
 
+header nav {
+  margin-top: 1.25rem;
+}
+
 header,
 header h1,
 header h2,
@@ -109,7 +113,7 @@ header p {
 
 /* ===== MENU ===== */
 nav {
-  background: var(--azul-suave);
+  background: transparent;
 }
 
 nav ul {
