@@ -40,7 +40,7 @@ header {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: #000000;
+  color: #ffffff;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   padding-left: 1.25rem;
@@ -57,7 +57,7 @@ header,
 header h1,
 header h2,
 header p {
-  color: #000000;
+  color: #ffffff;
 }
 
 /* Botão Login */
