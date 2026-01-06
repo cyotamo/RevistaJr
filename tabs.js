@@ -107,29 +107,52 @@ document.addEventListener("DOMContentLoaded", () => {
     return botao;
   };
 
-  const criarBlocoArtigo = ({ titulo, autor, link }) => {
+  const criarBlocoArtigo = ({ titulo, autor, link, resumo, imagem }) => {
     const item = document.createElement("div");
-    item.classList.add("artigo-bloco");
+    item.classList.add("artigo-card");
+
+    const thumb = document.createElement("div");
+    thumb.classList.add("artigo-thumb");
+
+    const imagemElemento = document.createElement("img");
+    imagemElemento.src =
+      imagem ??
+      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><rect width='100%25' height='100%25' fill='%23f0f0f0'/><text x='50%25' y='50%25' font-size='18' text-anchor='middle' fill='%23999' dy='.3em'>Sem imagem</text></svg>";
+    imagemElemento.alt = "Imagem do artigo";
+    thumb.appendChild(imagemElemento);
+    item.appendChild(thumb);
+
+    const conteudo = document.createElement("div");
+    conteudo.classList.add("artigo-conteudo");
 
     const tituloElemento = document.createElement("h4");
     tituloElemento.classList.add("artigo-titulo");
     tituloElemento.textContent = titulo ?? "";
-    item.appendChild(tituloElemento);
+    conteudo.appendChild(tituloElemento);
 
-    const meta = document.createElement("div");
-    meta.classList.add("artigo-meta");
-
-    const autorElemento = document.createElement("span");
+    const autorElemento = document.createElement("p");
     autorElemento.classList.add("artigo-autores");
     autorElemento.textContent = autor ?? "";
-    meta.appendChild(autorElemento);
+    conteudo.appendChild(autorElemento);
+
+    const resumoElemento = document.createElement("p");
+    resumoElemento.classList.add("artigo-resumo");
+    resumoElemento.textContent =
+      resumo ??
+      "Resumo indisponível no momento. Em breve será disponibilizada uma introdução detalhada.";
+    conteudo.appendChild(resumoElemento);
+
+    item.appendChild(conteudo);
+
+    const acoes = document.createElement("div");
+    acoes.classList.add("artigo-acoes");
 
     const botao = criarLinkBaixar(link);
     if (botao) {
-      meta.appendChild(botao);
+      acoes.appendChild(botao);
     }
 
-    item.appendChild(meta);
+    item.appendChild(acoes);
 
     return item;
   };
@@ -147,6 +170,8 @@ document.addEventListener("DOMContentLoaded", () => {
       titulo: editorial.titulo,
       autor: editorial.autor,
       link: editorial.link,
+      resumo: editorial.resumo,
+      imagem: editorial.imagem,
     });
 
     editorialConteudo.appendChild(item);
@@ -161,6 +186,8 @@ document.addEventListener("DOMContentLoaded", () => {
         titulo: artigo.titulo,
         autor: artigo.autor,
         link: artigo.link,
+        resumo: artigo.resumo,
+        imagem: artigo.imagem,
       });
 
       listaArtigos.appendChild(item);
@@ -201,6 +228,8 @@ document.addEventListener("DOMContentLoaded", () => {
         titulo: DADOS_INICIO.editorial.titulo,
         autor: DADOS_INICIO.editorial.autor,
         link: DADOS_INICIO.editorial.pdf,
+        resumo: DADOS_INICIO.editorial.resumo,
+        imagem: DADOS_INICIO.editorial.imagem,
       });
       editorialConteudo.appendChild(editorial);
     }
@@ -211,6 +240,8 @@ document.addEventListener("DOMContentLoaded", () => {
           titulo: artigo.titulo,
           autor: artigo.autor,
           link: artigo.pdf,
+          resumo: artigo.resumo,
+          imagem: artigo.imagem,
         });
         listaArtigos.appendChild(item);
       });
