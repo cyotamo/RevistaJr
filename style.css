@@ -148,22 +148,24 @@ nav a.active {
 }
 
 .artigo-bloco {
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 
 .artigo-titulo {
   color: #0b4da2;
   font-weight: 600;
-  margin: 0 0 4px;
+  margin: 0 0 2px;
 }
 
 .artigo-autores {
-  margin: 0 0 8px;
+  margin: 0 0 4px;
   color: #333;
+  font-size: 0.9rem;
 }
 
 .btn-pdf {
   display: inline-block;
+  margin-top: 2px;
 }
 
 /* ===== GRID DOS CARDS ===== */
