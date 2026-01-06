@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ultimaEdicao: "2026/1",
     editorial: {
       titulo: "Editorial",
+      autor: "Prof. Dr. Cremildo José Yotamo",
       pdf: "https://exemplo.com/editorial.pdf",
     },
     artigos: [
