@@ -50,113 +50,113 @@
 
   <!-- ===== SEÇÕES COMO TABS ===== -->
   <main>
+    <div class="container-revista">
 
-    <section id="inicio" class="tab active">
-      <h2 id="txtUltimaEdicao"></h2>
+      <section id="inicio" class="tab active">
+        <h2 id="txtUltimaEdicao"></h2>
 
-      <section id="blocoEditorial">
-        <h3>Editorial</h3>
-        <div id="editorialConteudo"></div>
+        <section id="blocoEditorial">
+          <h3>Editorial</h3>
+          <div id="editorialConteudo"></div>
+        </section>
+
+        <section id="blocoArtigos">
+          <h3>Artigos</h3>
+          <div id="listaArtigos"></div>
+        </section>
       </section>
 
-      <section id="blocoArtigos">
-        <h3>Artigos</h3>
-        <div id="listaArtigos"></div>
+      <section id="sobre" class="tab">
+        <div id="conteudoSobre"></div>
       </section>
-    </section>
 
-    <section id="sobre" class="tab">
-      <div id="conteudoSobre"></div>
-    </section>
+      <section id="conselho" class="tab">
+        <h3 class="secao-titulo">Conselho Editorial</h3>
+        <ul class="lista-conselho">
+          <li>Prof. Dr. Cremildo José Yotamo</li>
+          <li>Prof. Dr. Armando Agostinho Tomás</li>
+          <li>Mestre Inês Neuana</li>
+          <li>Mestre Januário José</li>
+          <li>Mestre King Chigalo</li>
+        </ul>
+      </section>
 
-<section id="conselho" class="tab">
-  <h3 class="secao-titulo">Conselho Editorial</h3>
-  <ul class="lista-conselho">
-    <li>Prof. Dr. Cremildo José Yotamo</li>
-    <li>Prof. Dr. Armando Agostinho Tomás</li>
-    <li>Mestre Inês Neuana</li>
-    <li>Mestre Januário José</li>
-    <li>Mestre King Chigalo</li>
-  </ul>
-</section>
+      <section id="normas" class="tab">
+        <h3 class="secao-titulo">Normas de Submissão</h3>
+        <ul>
+          <li>Estrutura IMRAD</li>
+          <li>Até 8.000 palavras</li>
+          <li>Referências APA 7ª edição</li>
+        </ul>
+        <a class="btn" href="#">Descarregar Modelo</a>
+      </section>
 
+      <section id="edicoes" class="tab">
+        <h3 class="secao-titulo">Edições Publicadas</h3>
+        <p>Listagem das edições anteriores...</p>
+      </section>
 
-    <section id="normas" class="tab">
-      <h3 class="secao-titulo">Normas de Submissão</h3>
-      <ul>
-        <li>Estrutura IMRAD</li>
-        <li>Até 8.000 palavras</li>
-        <li>Referências APA 7ª edição</li>
-      </ul>
-      <a class="btn" href="#">Descarregar Modelo</a>
-    </section>
+      <section id="submissao" class="tab">
+        <form id="formNovaSubmissao" enctype="multipart/form-data">
 
-    <section id="edicoes" class="tab">
-      <h3 class="secao-titulo">Edições Publicadas</h3>
-      <p>Listagem das edições anteriores...</p>
-    </section>
+          <h3>Submeta aqui o seu artigo</h3>
 
-    <section id="submissao" class="tab">
-      <form id="formNovaSubmissao" enctype="multipart/form-data">
+          <label>Nome</label>
+          <input type="text" id="nome" name="nome" required>
 
-        <h3>Submeta aqui o seu artigo</h3>
+          <label>Número de Estudante</label>
+          <input type="text" id="numero" name="numero" placeholder="XX.XXXX.XXXX" required>
 
-        <label>Nome</label>
-        <input type="text" id="nome" name="nome" required>
+          <label>Curso</label>
+          <select name="curso" id="curso" required>
+            <option value="">— Seleccione o curso —</option>
+          </select>
 
-        <label>Número de Estudante</label>
-        <input type="text" id="numero" name="numero" placeholder="XX.XXXX.XXXX" required>
+          <label>Linha de Pesquisa</label>
+          <select name="linha" id="linha" required>
+            <option value="">— Seleccione a linha de pesquisa —</option>
+          </select>
 
-        <label>Curso</label>
-        <select name="curso" id="curso" required>
-          <option value="">— Seleccione o curso —</option>
-        </select>
+          <label>Título</label>
+          <input type="text" id="titulo" name="titulo" required>
 
-        <label>Linha de Pesquisa</label>
-        <select name="linha" id="linha" required>
-          <option value="">— Seleccione a linha de pesquisa —</option>
-        </select>
+          <label>Autor 1</label>
+          <input type="text" id="autor1" name="autor1" required>
 
-        <label>Título</label>
-        <input type="text" id="titulo" name="titulo" required>
+          <label>Autor 2</label>
+          <input type="text" id="autor2" name="autor2">
 
-        <label>Autor 1</label>
-        <input type="text" id="autor1" name="autor1" required>
+          <label>Autor 3</label>
+          <input type="text" id="autor3" name="autor3">
 
-        <label>Autor 2</label>
-        <input type="text" id="autor2" name="autor2">
+          <label>E-mail</label>
+          <input type="email" id="email" name="email" required>
 
-        <label>Autor 3</label>
-        <input type="text" id="autor3" name="autor3">
+          <label>Contacto WhatsApp</label>
+          <input type="tel" id="contacto" name="contacto" required>
 
-        <label>E-mail</label>
-        <input type="email" id="email" name="email" required>
+          <label>Anexar artigo (.doc ou .docx)</label>
+          <input type="file" id="ficheiro" name="ficheiro" accept=".doc,.docx" required>
 
-        <label>Contacto WhatsApp</label>
-        <input type="tel" id="contacto" name="contacto" required>
+          <button type="button" class="btn-submeter" id="btnEnviar" onclick="enviarArtigo()">
+            <span class="btn-text">Enviar</span>
+            <span class="btn-spinner"></span>
+          </button>
 
-        <label>Anexar artigo (.doc ou .docx)</label>
-        <input type="file" id="ficheiro" name="ficheiro" accept=".doc,.docx" required>
+          <div id="mensagemSucesso" class="mensagem-sucesso" style="display:none;"></div>
 
-        <button type="button" class="btn-submeter" id="btnEnviar" onclick="enviarArtigo()">
-          <span class="btn-text">Enviar</span>
-          <span class="btn-spinner"></span>
-        </button>
+        </form>
 
-        <div id="mensagemSucesso" class="mensagem-sucesso" style="display:none;"></div>
+        <script src="submissao.js"></script>
+      </section>
 
-      </form>
+      <section id="contactos" class="tab">
+        <h3 class="secao-titulo">Contactos</h3>
+        <p>Campus Universitário — Napinine</p>
+        <p>Email: revista.fcee@unirovuma.ac.mz</p>
+      </section>
 
-      <script src="submissao.js"></script>
-    </section>
-
-    
-    <section id="contactos" class="tab">
-      <h3 class="secao-titulo">Contactos</h3>
-      <p>Campus Universitário — Napinine</p>
-      <p>Email: revista.fcee@unirovuma.ac.mz</p>
-    </section>
-
+    </div>
   </main>
 
   <footer>
