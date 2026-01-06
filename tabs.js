@@ -7,19 +7,54 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     artigos: [
       {
-        titulo: "Título do Artigo Exemplo 1",
-        autor: "Nome do Autor 1",
+        titulo: "Impacto das Microfinanças no Rendimento das Famílias Urbanas no Município de Nampula (2019–2023)",
+        autor: "Armindo Joaquim Mussa",
         pdf: "https://exemplo.com/artigo1.pdf",
       },
       {
-        titulo: "Título do Artigo Exemplo 2",
-        autor: "Nome do Autor 2",
+        titulo: "Determinantes do Crescimento das Pequenas e Médias Empresas na Cidade de Maputo no Período Pós-COVID-19 (2020–2022)",
+        autor: "Helena Maria Chale",
         pdf: "https://exemplo.com/artigo2.pdf",
       },
       {
-        titulo: "Título do Artigo Exemplo 3",
-        autor: "Nome do Autor 3",
+        titulo: "Efeitos da Política Monetária do Banco de Moçambique na Inflação Nacional (2015–2022)",
+        autor: "Carlos Alberto Macamo",
         pdf: "https://exemplo.com/artigo3.pdf",
+      },
+      {
+        titulo: "Práticas de Gestão Estratégica e Desempenho das Empresas Familiares do Sector Comercial na Província de Nampula (2018–2022)",
+        autor: "Lídia Ernesto Nhampossa",
+        pdf: "https://exemplo.com/artigo4.pdf",
+      },
+      {
+        titulo: "Influência da Cultura Organizacional na Motivação dos Trabalhadores das Empresas Privadas da Cidade de Maputo (2019–2021)",
+        autor: "Nelson Tomás Langa",
+        pdf: "https://exemplo.com/artigo5.pdf",
+      },
+      {
+        titulo: "Gestão de Recursos Humanos e Produtividade Docente nas Instituições Públicas de Ensino Superior em Moçambique (2017–2022)",
+        autor: "Rosa Amélia Cossa",
+        pdf: "https://exemplo.com/artigo6.pdf",
+      },
+      {
+        titulo: "Qualidade da Informação Contabilística e Tomada de Decisão nas Pequenas e Médias Empresas da Cidade de Nampula (2018–2022)",
+        autor: "Paulo Sérgio Matavele",
+        pdf: "https://exemplo.com/artigo7.pdf",
+      },
+      {
+        titulo: "Eficácia do Sistema de Controlo Interno na Prevenção de Fraudes nas Empresas Comerciais de Maputo (2019–2023)",
+        autor: "Ana Paula Nhantumbo",
+        pdf: "https://exemplo.com/artigo8.pdf",
+      },
+      {
+        titulo: "Descentralização Administrativa e Qualidade da Prestação de Serviços Públicos no Distrito de Ribáuè, Província de Nampula (2016–2021)",
+        autor: "Eusébio Francisco Mucavel",
+        pdf: "https://exemplo.com/artigo9.pdf",
+      },
+      {
+        titulo: "Transparência na Gestão Pública e Combate à Corrupção nos Conselhos Municipais de Moçambique (2015–2022)",
+        autor: "Julieta Teresa Mabunda",
+        pdf: "https://exemplo.com/artigo10.pdf",
       },
     ],
   };
