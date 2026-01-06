@@ -52,7 +52,7 @@ header,
 header h1,
 header h2,
 header p {
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Botão Login */
@@ -127,6 +127,10 @@ nav a {
   font-weight: 600;
   padding: 0.375rem 0.625rem;
   border-radius: 4px;
+}
+
+header nav a {
+  color: #000000;
 }
 
 nav a.active {
