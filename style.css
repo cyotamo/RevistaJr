@@ -31,11 +31,28 @@ button {
 /* ===== CABEÇALHO ===== */
 /* ===== CABEÇALHO (VERSÃO COMPACTA) ===== */
 header {
-  background: var(--azul-escuro);
+  background-image: linear-gradient(
+      rgba(10, 40, 90, 0.75),
+      rgba(10, 40, 90, 0.75)
+    ),
+    url("header-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
-  padding: 0.625rem 1.25rem;   /* altura MUITO reduzida */
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   position: relative;
   text-align: center;
+}
+
+header,
+header h1,
+header h2,
+header p {
+  color: #ffffff;
 }
 
 /* Botão Login */
