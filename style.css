@@ -11,7 +11,7 @@ body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   color: var(--texto-principal);
-  background: white;
+  background: var(--cinza-claro);
   font-size: 1rem;
   line-height: 1.6;
   overflow-x: hidden;
@@ -117,9 +117,17 @@ nav a.active {
 }
 
 /* ===== TABS ===== */
+.container-revista {
+  max-width: 1100px;
+  margin: 2.5rem auto;
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+}
+
 .tab {
   display: none;
-  padding: 2.5rem 1.25rem;
+  padding: 2rem;
 }
 
 .tab.active {
@@ -147,8 +155,17 @@ nav a.active {
   background: var(--azul-suave);
 }
 
+#listaArtigos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 .artigo-bloco {
-  margin-bottom: 8px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  background: #fafafa;
 }
 
 .artigo-titulo {
