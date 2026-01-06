@@ -12,7 +12,20 @@ body {
   font-family: 'Segoe UI', sans-serif;
   color: var(--texto-principal);
   background: white;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a,
+button {
+  min-height: 2.75rem;
 }
 
 /* ===== CABEÇALHO ===== */
@@ -20,7 +33,7 @@ body {
 header {
   background: var(--azul-escuro);
   color: white;
-  padding: 10px 20px;   /* altura MUITO reduzida */
+  padding: 0.625rem 1.25rem;   /* altura MUITO reduzida */
   position: relative;
   text-align: center;
 }
@@ -28,9 +41,9 @@ header {
 /* Botão Login */
 .login-btn {
   position: absolute;
-  right: 20px;
-  top: 10px;
-  padding: 5px 12px;
+  right: 1.25rem;
+  top: 0.625rem;
+  padding: 0.3125rem 0.75rem;
   background: white;
   color: var(--azul-escuro);
   border: none;
@@ -45,7 +58,7 @@ header {
   display: grid;
   gap: 0px;               /* nenhum espaçamento entre as linhas */
   line-height: 1.05;      /* linhas bem compactas */
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 /* Universidade Rovuma */
@@ -84,18 +97,18 @@ nav {
 
 nav ul {
   margin: 0;
-  padding: 14px 0;
+  padding: 0.875rem 0;
   list-style: none;
   display: flex;
   justify-content: center;
-  gap: 22px;
+  gap: 1.375rem;
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  padding: 6px 10px;
+  padding: 0.375rem 0.625rem;
   border-radius: 4px;
 }
 
@@ -106,7 +119,7 @@ nav a.active {
 /* ===== TABS ===== */
 .tab {
   display: none;
-  padding: 40px 20px;
+  padding: 2.5rem 1.25rem;
 }
 
 .tab.active {
@@ -124,10 +137,10 @@ nav a.active {
   display: inline-block;
   background: var(--azul-escuro);
   color: white;
-  padding: 10px 16px;
+  padding: 0.625rem 1rem;
   text-decoration: none;
   border-radius: 6px;
-  margin-right: 8px;
+  margin-right: 0.5rem;
 }
 
 .btn:hover {
@@ -156,15 +169,15 @@ nav a.active {
 /* ===== GRID DOS CARDS ===== */
 .cards-grade {
   display: grid;
-  gap: 16px;
+  gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .card {
   background: white;
   border: 1px solid #d9d9d9;
-  padding: 16px;
+  padding: 1rem;
   border-radius: 8px;
 }
 
@@ -172,14 +185,14 @@ nav a.active {
 .tabela-submissoes {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 16px;
+  margin-top: 1rem;
   background: #fff;
 }
 
 .tabela-submissoes th,
 .tabela-submissoes td {
   border: 1px solid #e0e0e0;
-  padding: 10px;
+  padding: 0.625rem;
   text-align: left;
   font-size: 0.95rem;
 }
@@ -203,13 +216,13 @@ nav a.active {
 }
 
 .icon-word {
-  width: 22px;
-  height: 22px;
+  width: 1.375rem;
+  height: 1.375rem;
   cursor: pointer;
 }
 
 .estado-tabela {
-  margin-top: 16px;
+  margin-top: 1rem;
   font-weight: 600;
 }
 
@@ -217,7 +230,7 @@ nav a.active {
 .btn-aprovar {
   position: relative;
   min-width: 110px;
-  padding: 6px 14px;
+  padding: 0.375rem 0.875rem;
   border-radius: 6px;
   border: none;
   background: #2563eb;
@@ -238,8 +251,8 @@ nav a.active {
 .btn-analisar .btn-spinner,
 .btn-aprovar .btn-spinner {
   display: none;
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  height: 1rem;
   border: 2px solid transparent;
   border-top: 2px solid #fff;
   border-radius: 50%;
@@ -267,8 +280,8 @@ footer {
   background: #0a335f;
   color: white;
   text-align: center;
-  padding: 16px;
-  margin-top: 40px;
+  padding: 1rem;
+  margin-top: 2.5rem;
 }
 
 /* ===== MODAL LOGIN ===== */
@@ -288,8 +301,9 @@ footer {
 
 .modal-box {
   background: white;
-  width: 320px;
-  padding: 24px;
+  width: 100%;
+  max-width: 20rem;
+  padding: 1.5rem;
   border-radius: 8px;
   text-align: left;
   box-shadow: 0 6px 18px rgba(0,0,0,0.2);
@@ -298,15 +312,15 @@ footer {
 
 .modal-box h3 {
   margin-top: 0;
-  margin-bottom: 14px;
+  margin-bottom: 0.875rem;
   color: var(--azul-escuro);
   text-align: center;
 }
 
 .modal-box input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 14px;
+  padding: 0.625rem;
+  margin-bottom: 0.875rem;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
@@ -314,7 +328,7 @@ footer {
 .btn-fechar {
   background: #777;
   color: white;
-  padding: 8px 14px;
+  padding: 0.5rem 0.875rem;
   border-radius: 6px;
   border: none;
   cursor: pointer;
@@ -337,17 +351,18 @@ footer {
 }
 
 #formNovaSubmissao {
-  max-width: 720px;
-  margin-top: 30px;
+  width: 100%;
+  max-width: 45rem;
+  margin-top: 1.875rem;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 0.875rem;
 }
 
 /* Título do formulário */
 #formNovaSubmissao h3 {
   color: var(--azul-escuro);
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 /* Labels */
@@ -361,7 +376,7 @@ footer {
 #formNovaSubmissao select,
 #formNovaSubmissao textarea {
   width: 100%;
-  padding: 10px 12px;
+  padding: 0.625rem 0.75rem;
   border: 1px solid #cfd6df;
   border-radius: 6px;
   font-family: inherit;
@@ -375,14 +390,14 @@ footer {
 
 /* Campo ficheiro */
 #formNovaSubmissao input[type="file"] {
-  padding: 6px;
+  padding: 0.375rem;
 }
 
 /* Botão Enviar */
 #formNovaSubmissao button {
   align-self: flex-start;
-  margin-top: 10px;
-  padding: 10px 22px;
+  margin-top: 0.625rem;
+  padding: 0.625rem 1.375rem;
   background: var(--azul-escuro);
   color: #fff;
   border: none;
@@ -396,13 +411,13 @@ footer {
 }
 
 .btn-spinner {
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  height: 1rem;
   border: 2px solid transparent;
   border-top: 2px solid #fff;
   border-radius: 50%;
   display: none;
-  margin-left: 8px;
+  margin-left: 0.5rem;
   animation: spin 0.8s linear infinite;
 }
 
@@ -421,7 +436,7 @@ footer {
 }
 
 .mensagem-sucesso {
-  margin-top: 10px;
+  margin-top: 0.625rem;
   color: #1b6f3a;
   font-weight: 600;
 }
@@ -430,5 +445,39 @@ footer {
 @media (max-width: 600px) {
   #formNovaSubmissao {
     max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  nav a,
+  nav button {
+    width: 100%;
+    padding: 0.75rem;
+    text-align: center;
+  }
+
+  .cards-grade {
+    display: block;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  #formNovaSubmissao button {
+    align-self: stretch;
+  }
+
+  .login-btn {
+    position: static;
+    margin: 0 auto 0.5rem;
   }
 }
