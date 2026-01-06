@@ -187,11 +187,33 @@ nav a.active {
   gap: 1.25rem;
 }
 
-.artigo-bloco {
-  padding: 1.25rem 1.5rem;
+.artigo-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: #ffffff;
   border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  align-items: flex-start;
+}
+
+.artigo-thumb {
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
   border-radius: 8px;
-  background: #fafafa;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.artigo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artigo-conteudo {
+  flex: 1;
 }
 
 .artigo-titulo {
@@ -200,17 +222,21 @@ nav a.active {
   margin: 0 0 2px;
 }
 
-.artigo-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 0.2rem;
-}
-
 .artigo-autores {
   margin: 0;
   color: #333;
   font-size: 0.9rem;
+}
+
+.artigo-resumo {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.4rem;
+}
+
+.artigo-acoes {
+  display: flex;
+  align-items: center;
 }
 
 .btn-pdf {
@@ -221,6 +247,21 @@ nav a.active {
   min-height: unset;        /* remove altura mínima herdada */
   border-radius: 6px;
   white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .artigo-card {
+    flex-direction: column;
+  }
+
+  .artigo-thumb {
+    width: 100%;
+    height: 180px;
+  }
+
+  .artigo-acoes {
+    margin-top: 0.5rem;
+  }
 }
 
 /* ===== GRID DOS CARDS ===== */
