@@ -31,11 +31,16 @@ button {
 /* ===== CABEÇALHO ===== */
 /* ===== CABEÇALHO (VERSÃO COMPACTA) ===== */
 header {
-  background-image: url("header-bg.jpg");
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    ),
+    url("header-bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: white;
+  color: #000000;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   padding-left: 1.25rem;
