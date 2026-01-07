@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return botao;
   };
 
-  const criarBlocoArtigo = ({ titulo, autor, link, resumo, imagem }) => {
+  const criarBlocoArtigo = ({ titulo, autor, link, resumo, imagem, artigoIndex }) => {
     const item = document.createElement("div");
     item.classList.add("artigo-card");
 
@@ -115,9 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
     thumb.classList.add("artigo-thumb");
 
     const imagemElemento = document.createElement("img");
-    imagemElemento.src =
-      imagem ??
-      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><rect width='100%25' height='100%25' fill='%23f0f0f0'/><text x='50%25' y='50%25' font-size='18' text-anchor='middle' fill='%23999' dy='.3em'>Sem imagem</text></svg>";
+    const imagemPadrao = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><rect width='100%25' height='100%25' fill='%23f0f0f0'/><text x='50%25' y='50%25' font-size='18' text-anchor='middle' fill='%23999' dy='.3em'>Sem imagem</text></svg>";
+    const caminhoImagem = imagem ?? (artigoIndex ? `assets/thumbs/art${artigoIndex}.jpg` : null);
+    imagemElemento.src = caminhoImagem ?? imagemPadrao;
     imagemElemento.alt = "Imagem do artigo";
     thumb.appendChild(imagemElemento);
     item.appendChild(thumb);
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
       autor: editorial.autor,
       link: editorial.link,
       resumo: editorial.resumo,
-      imagem: editorial.imagem,
+      imagem: "assets/thumbs/editorial.jpg",
     });
 
     editorialConteudo.appendChild(item);
@@ -181,13 +181,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!listaArtigos) return;
     limparContainer(listaArtigos);
 
-    artigos.forEach((artigo) => {
+    artigos.forEach((artigo, index) => {
       const item = criarBlocoArtigo({
         titulo: artigo.titulo,
         autor: artigo.autor,
         link: artigo.link,
         resumo: artigo.resumo,
-        imagem: artigo.imagem,
+        artigoIndex: index + 1,
       });
 
       listaArtigos.appendChild(item);
@@ -229,19 +229,19 @@ document.addEventListener("DOMContentLoaded", () => {
         autor: DADOS_INICIO.editorial.autor,
         link: DADOS_INICIO.editorial.pdf,
         resumo: DADOS_INICIO.editorial.resumo,
-        imagem: DADOS_INICIO.editorial.imagem,
+        imagem: "assets/thumbs/editorial.jpg",
       });
       editorialConteudo.appendChild(editorial);
     }
 
     if (listaArtigos) {
-      DADOS_INICIO.artigos.forEach((artigo) => {
+      DADOS_INICIO.artigos.forEach((artigo, index) => {
         const item = criarBlocoArtigo({
           titulo: artigo.titulo,
           autor: artigo.autor,
           link: artigo.pdf,
           resumo: artigo.resumo,
-          imagem: artigo.imagem,
+          artigoIndex: index + 1,
         });
         listaArtigos.appendChild(item);
       });
