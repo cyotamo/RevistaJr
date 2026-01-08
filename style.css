@@ -152,6 +152,20 @@ nav a.active {
   margin-bottom: 12px;
 }
 
+.chamada-publicacao {
+  margin: 8px 0 20px 0;
+  font-weight: 600;
+}
+
+.chamada-publicacao a {
+  color: #0b4aa2;
+  text-decoration: none;
+}
+
+.chamada-publicacao a:hover {
+  text-decoration: underline;
+}
+
 /* ===== BOTÕES ===== */
 .btn {
   display: inline-block;
