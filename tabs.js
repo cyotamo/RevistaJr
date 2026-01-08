@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const DADOS_INICIO = {
-    ultimaEdicao: "2026/1",
+    ultimaEdicao: "Edição Actual: Vol. 2026, Edição n.º 1 (Ago – Dez)",
     editorial: {
       titulo: "Editorial",
       autor: "Prof. Dr. Cremildo José Yotamo",
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const renderizarUltimaEdicao = (dados) => {
     if (!txtUltimaEdicao) return;
-    txtUltimaEdicao.textContent = `Última Edição: ${dados.ultimaEdicao}`;
+    txtUltimaEdicao.textContent = dados.ultimaEdicao;
   };
 
   const renderizarEditorial = (editorial) => {
@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
     limparContainer(listaArtigos);
 
     if (txtUltimaEdicao) {
-      txtUltimaEdicao.textContent = `Última Edição: ${DADOS_INICIO.ultimaEdicao}`;
+      txtUltimaEdicao.textContent = DADOS_INICIO.ultimaEdicao;
     }
 
     if (editorialConteudo && DADOS_INICIO.editorial) {
