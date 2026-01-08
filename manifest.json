@@ -1,6 +1,6 @@
 {
-  "name": "Revista FACEE",
-  "short_name": "Revista FACEE",
+  "name": "Plataforma Científica ECONOGEST 360",
+  "short_name": "ECONOGEST 360",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -19,3 +19,4 @@
     }
   ]
 }
+
