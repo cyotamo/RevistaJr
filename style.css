@@ -78,35 +78,21 @@ header p {
 /* Linhas MUITO mais próximas */
 .header-center {
   display: grid;
-  gap: 0px;               /* nenhum espaçamento entre as linhas */
-  line-height: 1.05;      /* linhas bem compactas */
+  gap: 4px;
+  line-height: 1.05;
   margin-top: 0.625rem;
 }
 
-/* Universidade Rovuma */
-.header-center p:first-child {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  margin: 0;
-}
-
-/* Faculdade — discreto */
-.header-center h1 {
-  font-size: 1.15rem;      /* reduzido */
-  font-weight: 600;
-  margin: 0;
-}
-
-/* Revista Científica — discretamente maior */
-.header-center h2 {
-  font-size: 1.25rem;
+/* Título principal */
+.site-title {
+  font-size: 3rem;
   font-weight: 700;
   margin: 0;
 }
 
-/* Última frase */
-.header-center p:last-child {
-  font-size: 0.85rem;
+/* Subtítulo */
+.site-subtitle {
+  font-size: 1.1rem;
   opacity: 0.9;
   margin: 0;
 }
