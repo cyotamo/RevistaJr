@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const MOSTRAR_ARTIGOS = false;
   const DADOS_INICIO = {
     ultimaEdicao: "Edição Actual: Vol. 2026, Edição n.º 1 (Ago – Dez)",
     editorial: {
@@ -175,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const renderizarArtigos = (artigos) => {
+    if (!MOSTRAR_ARTIGOS) return;
     if (!listaArtigos) return;
     limparContainer(listaArtigos);
 
@@ -229,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
       editorialConteudo.appendChild(editorial);
     }
 
-    if (listaArtigos) {
+    if (MOSTRAR_ARTIGOS && listaArtigos) {
       DADOS_INICIO.artigos.forEach((artigo) => {
         const item = criarBlocoArtigo({
           titulo: artigo.titulo,
