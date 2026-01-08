@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
     conteudoSobre.appendChild(titulo);
 
     const paragrafos = [
-      "Esta plataforma é um espaço institucional destinado à divulgação e valorização da produção científica desenvolvida na Faculdade. Tem como foco principal a publicação de pesquisas oriundas dos Trabalhos de Conclusão de Curso (TCC) defendidos na faculdade, integrando igualmente outros tipos de pesquisas científicas, projectos de investigação, relatórios técnicos relevantes.",
+      "Esta plataforma é um espaço institucional da Faculdade de Ciências Económicas e Empresarias da Universidade Rovuma, destinado à divulgação e valorização da produção científica. Tem como foco principal a publicação de pesquisas oriundas dos Trabalhos de Conclusão de Curso (TCC) defendidos na faculdade, integrando igualmente outros tipos de pesquisas científicas, projectos de investigação, relatórios técnicos relevantes.",
       "Assim, o seu objectivo é promover a investigação científica, facilitar o acesso ao conhecimento produzido e reforçar a visibilidade do trabalho académico de estudantes, docentes e investigadores, contribuindo para o fortalecimento da qualidade científica e da memória institucional da Faculdade.",
     ];
 
