@@ -259,18 +259,51 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   if (btnOkLogin) {
-    btnOkLogin.addEventListener("click", () => {
-      const email = document.getElementById("emailLogin").value;
-      const senha = document.getElementById("senhaLogin").value;
+    const normalizarCredenciais = () => {
+      const email = document.getElementById("emailLogin").value.trim();
+      const senha = document.getElementById("senhaLogin").value.trim();
+      console.log("[login] credenciais recolhidas", { email, senhaLength: senha.length });
+      return { email, senha };
+    };
 
-      loginFirebase(email, senha)
-        .then(() => {
-          window.location.href = "gestor.html";
-        })
-        .catch(() => {
-          alert("Email ou senha incorrectos");
-        });
-    });
+    const mensagemErroLogin = (erro) => {
+      if (!erro || !erro.code) {
+        return "Servidor indisponível / Falha de rede";
+      }
+
+      if (erro.code === "auth/invalid-credential" || erro.code === "auth/wrong-password" || erro.code === "auth/user-not-found") {
+        return "Credenciais incorrectas";
+      }
+
+      if (erro.code === "auth/unauthorized-domain") {
+        return "Resposta inválida do servidor";
+      }
+
+      return "Servidor indisponível / Falha de rede";
+    };
+
+    const tratarLogin = async () => {
+      console.log("[login] início do processo");
+      const { email, senha } = normalizarCredenciais();
+
+      if (!email || !senha) {
+        console.warn("[login] campos vazios");
+        alert("Credenciais incorrectas");
+        return;
+      }
+
+      try {
+        console.log("[login] a autenticar no Firebase");
+        await loginFirebase(email, senha);
+        console.log("[login] login efectuado com sucesso");
+        window.location.href = "gestor.html";
+      } catch (erro) {
+        console.error("[login] falha na autenticação", erro);
+        alert(mensagemErroLogin(erro));
+      }
+    };
+
+    btnOkLogin.addEventListener("click", tratarLogin);
   }
 
   modal.addEventListener("click", (e) => {
