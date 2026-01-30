@@ -249,19 +249,45 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("modalLogin");
   const btnFechar = document.getElementById("btnFecharModal");
   const btnOkLogin = document.getElementById("btnOkLogin");
+  const inputEmail = document.getElementById("emailLogin");
+  const inputSenha = document.getElementById("senhaLogin");
+  let ultimoFoco = null;
 
-  btnLogin.addEventListener("click", () => {
-    modal.style.display = "flex";
-  });
+  const abrirModal = () => {
+    if (!modal) {
+      return;
+    }
+    ultimoFoco = document.activeElement;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => {
+      inputEmail?.focus();
+    });
+  };
 
-  btnFechar.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
+  const fecharModal = () => {
+    if (!modal) {
+      return;
+    }
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    if (ultimoFoco && typeof ultimoFoco.focus === "function") {
+      ultimoFoco.focus();
+    }
+  };
+
+  if (btnLogin) {
+    btnLogin.addEventListener("click", abrirModal);
+  }
+
+  if (btnFechar) {
+    btnFechar.addEventListener("click", fecharModal);
+  }
 
   if (btnOkLogin) {
     const normalizarCredenciais = () => {
-      const email = document.getElementById("emailLogin").value.trim();
-      const senha = document.getElementById("senhaLogin").value.trim();
+      const email = inputEmail?.value.trim() ?? "";
+      const senha = inputSenha?.value.trim() ?? "";
       console.log("[login] credenciais recolhidas", { email, senhaLength: senha.length });
       return { email, senha };
     };
@@ -306,9 +332,17 @@ document.addEventListener("DOMContentLoaded", () => {
     btnOkLogin.addEventListener("click", tratarLogin);
   }
 
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        fecharModal();
+      }
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal?.classList.contains("is-open")) {
+      fecharModal();
     }
   });
 
