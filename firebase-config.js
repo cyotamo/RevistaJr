@@ -7,12 +7,12 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAECESMJPgsDRgJW1KSQlKXXslX_fC24ew",
-  authDomain: "revista-facee.firebaseapp.com",
-  projectId: "revista-facee",
-  storageBucket: "revista-facee.firebasestorage.app",
-  messagingSenderId: "12711898318",
-  appId: "1:12711898318:web:ede6211057939a09fa749f"
+  apiKey: "AIzaSyB2tYaLoS4VgdQzVuE3620UL0NRbniFnnM",
+  authDomain: "econogest360.firebaseapp.com",
+  projectId: "econogest360",
+  storageBucket: "econogest360.firebasestorage.app",
+  messagingSenderId: "708803473748",
+  appId: "1:708803473748:web:24d56e9576006b7971d8c1"
 };
 
 const app = initializeApp(firebaseConfig);
