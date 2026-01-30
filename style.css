@@ -100,7 +100,7 @@ header p {
 
 /* ===== MENU ===== */
 nav {
-  background: transparent;
+  background: #f6f8fc;
 }
 
 nav ul {
@@ -113,7 +113,7 @@ nav ul {
 }
 
 nav a {
-  color: white;
+  color: #0a3d62;
   text-decoration: none;
   font-weight: 600;
   padding: 0.375rem 0.625rem;
