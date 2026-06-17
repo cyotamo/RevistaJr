@@ -6,12 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const analiseTabelaContainer = document.getElementById("analiseTabela");
   const aprovadasTabelaContainer = document.getElementById("aprovadasTabela");
   const publicadasTabelaContainer = document.getElementById("publicadasTabela");
+  const reprovadasTabelaContainer = document.getElementById("reprovadasTabela");
 
   const WEB_APP_URL =
     "https://script.google.com/macros/s/AKfycbyvj-DF7IYQh1fn9AFxQhiLLLGe1ssudIhUZzjigarcjyI3vc_z9-nG09sAFwMtDnwvXw/exec";
   const ENDPOINT_NOVAS_SUBMISSOES = `${WEB_APP_URL}?acao=novasSubmissoes`;
   const ENDPOINT_SUBMISSOES_ANALISE = `${WEB_APP_URL}?acao=submissoesEmAnalise`;
   const ENDPOINT_SUBMISSOES_APROVADAS = `${WEB_APP_URL}?acao=submissoesAprovadas`;
+  const ENDPOINT_SUBMISSOES_REPROVADAS = `${WEB_APP_URL}?acao=submissoesReprovadas`;
   const ENDPOINT_SUBMISSOES_PUBLICADAS = `${WEB_APP_URL}?acao=submissoesPublicadas`;
 
   verificarAuth(user => {
@@ -150,16 +152,21 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.appendChild(celulaArtigo);
 
       const celulaSituacao = document.createElement("td");
-      const botao = document.createElement("button");
-      botao.type = "button";
-      botao.className = opcoesBotao.classe;
+      const botoes = Array.isArray(opcoesBotao) ? opcoesBotao : [opcoesBotao];
       const rowIndex = linha?.rowIndex;
-      botao.innerHTML = `
-        <span class="btn-text">${opcoesBotao.texto}</span>
-        <span class="btn-spinner"></span>
-      `;
-      botao.addEventListener("click", () => opcoesBotao.onClick(botao, rowIndex));
-      celulaSituacao.appendChild(botao);
+
+      botoes.forEach((opcaoBotao) => {
+        const botao = document.createElement("button");
+        botao.type = "button";
+        botao.className = opcaoBotao.classe;
+        botao.innerHTML = `
+          <span class="btn-text">${opcaoBotao.texto}</span>
+          <span class="btn-spinner"></span>
+        `;
+        botao.addEventListener("click", () => opcaoBotao.onClick(botao, rowIndex));
+        celulaSituacao.appendChild(botao);
+      });
+
       tr.appendChild(celulaSituacao);
 
       tbody.appendChild(tr);
@@ -191,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
     container.appendChild(tabela);
   };
 
-  const criarTabelaPublicadas = (registos) => {
+  const criarTabelaSemAcoes = (registos, situacao) => {
     const tabela = document.createElement("table");
     tabela.classList.add("tabela-submissoes");
 
@@ -257,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tr.appendChild(celulaArtigo);
 
       const celulaSituacao = document.createElement("td");
-      celulaSituacao.textContent = "—";
+      celulaSituacao.textContent = situacao;
       tr.appendChild(celulaSituacao);
 
       tbody.appendChild(tr);
@@ -267,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return tabela;
   };
 
-  const renderTabelaPublicadas = (container, registos) => {
+  const renderTabelaSemAcoes = (container, registos, situacao) => {
     if (!container) return;
     container.innerHTML = "";
 
@@ -276,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const tabela = criarTabelaPublicadas(registos);
+    const tabela = criarTabelaSemAcoes(registos, situacao);
     container.appendChild(tabela);
   };
 
@@ -304,6 +311,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       botao.classList.remove("loading");
       botao.disabled = true;
+
+      await carregarNovasSubmissoes();
     } catch (err) {
       botao.classList.remove("loading");
       botao.disabled = false;
@@ -335,10 +344,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
       botao.classList.remove("loading");
       botao.disabled = true;
+
+      await carregarSubmissoesEmAnalise();
     } catch (err) {
       botao.classList.remove("loading");
       botao.disabled = false;
       alert("Erro ao aprovar submissão.");
+    }
+  };
+
+  const onReprovarClick = async (botao, rowIndex) => {
+    if (botao.classList.contains("loading")) return;
+
+    botao.classList.add("loading");
+    botao.disabled = true;
+
+    try {
+      const dados = new FormData();
+      dados.append("acao", "marcarReprovado");
+      dados.append("rowIndex", rowIndex);
+
+      const res = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: dados,
+      });
+
+      const json = await res.json();
+
+      if (!json.sucesso) {
+        throw new Error(json.mensagem || "Erro ao reprovar");
+      }
+
+      botao.classList.remove("loading");
+      botao.disabled = true;
+
+      await carregarSubmissoesEmAnalise();
+    } catch (err) {
+      botao.classList.remove("loading");
+      botao.disabled = false;
+      alert("Erro ao reprovar submissão.");
     }
   };
 
@@ -428,11 +472,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      renderTabela(analiseTabelaContainer, payload.dados || [], {
-        classe: "btn-aprovar",
-        texto: "Aprovar",
-        onClick: onAprovarClick,
-      });
+      renderTabela(analiseTabelaContainer, payload.dados || [], [
+        {
+          classe: "btn-aprovar",
+          texto: "Aprovar",
+          onClick: onAprovarClick,
+        },
+        {
+          classe: "btn-analisar",
+          texto: "Reprovar",
+          onClick: onReprovarClick,
+        },
+      ]);
     } catch (erro) {
       console.error("Erro ao carregar submissões em análise:", erro);
       renderizarEstado(analiseTabelaContainer, "Não foi possível carregar as submissões.");
@@ -471,6 +522,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const carregarSubmissoesReprovadas = async () => {
+    if (!reprovadasTabelaContainer) return;
+    if (!ENDPOINT_SUBMISSOES_REPROVADAS) {
+      renderizarEstado(reprovadasTabelaContainer, "Endpoint não configurado.");
+      return;
+    }
+
+    renderizarEstado(reprovadasTabelaContainer, "A carregar submissões...");
+
+    try {
+      const response = await fetch(ENDPOINT_SUBMISSOES_REPROVADAS, {
+        cache: "no-store",
+      });
+      const payload = await response.json();
+
+      if (!payload.sucesso) {
+        console.error("Erro ao carregar submissões reprovadas");
+        renderizarEstado(reprovadasTabelaContainer, "Não foi possível carregar as submissões.");
+        return;
+      }
+
+      renderTabelaSemAcoes(reprovadasTabelaContainer, payload.dados || [], "Reprovado");
+    } catch (erro) {
+      console.error("Erro ao carregar submissões reprovadas:", erro);
+      renderizarEstado(reprovadasTabelaContainer, "Não foi possível carregar as submissões.");
+    }
+  };
+
   const carregarSubmissoesPublicadas = async () => {
     if (!publicadasTabelaContainer) return;
     if (!ENDPOINT_SUBMISSOES_PUBLICADAS) {
@@ -492,7 +571,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      renderTabelaPublicadas(publicadasTabelaContainer, payload.dados || []);
+      renderTabelaSemAcoes(publicadasTabelaContainer, payload.dados || [], "Publicado");
     } catch (erro) {
       console.error("Erro ao carregar submissões publicadas:", erro);
       renderizarEstado(publicadasTabelaContainer, "Não foi possível carregar as submissões.");
@@ -521,6 +600,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (target === "aprovadas") {
         carregarSubmissoesAprovadas();
+      }
+
+      if (target === "reprovadas") {
+        carregarSubmissoesReprovadas();
       }
 
       if (target === "publicadas") {
