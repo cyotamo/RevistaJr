@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const publicadasTabelaContainer = document.getElementById("publicadasTabela");
   const reprovadasTabelaContainer = document.getElementById("reprovadasTabela");
 
-  const WEB_APP_URL =
-    "https://script.google.com/macros/s/AKfycbyvj-DF7IYQh1fn9AFxQhiLLLGe1ssudIhUZzjigarcjyI3vc_z9-nG09sAFwMtDnwvXw/exec";
+  const { WEB_APP_URL } = window.APP_CONFIG;
   const ENDPOINT_NOVAS_SUBMISSOES = `${WEB_APP_URL}?acao=novasSubmissoes`;
   const ENDPOINT_SUBMISSOES_ANALISE = `${WEB_APP_URL}?acao=submissoesEmAnalise`;
   const ENDPOINT_SUBMISSOES_APROVADAS = `${WEB_APP_URL}?acao=submissoesAprovadas`;
