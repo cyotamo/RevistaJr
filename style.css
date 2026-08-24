@@ -229,6 +229,7 @@ nav a.active {
 }
 
 .artigo-resumo {
+  display: none;
   font-size: 0.85rem;
   color: #555;
   margin-top: 0.4rem;
