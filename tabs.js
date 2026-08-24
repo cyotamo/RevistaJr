@@ -1,62 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const MOSTRAR_ARTIGOS = false;
+  const MOSTRAR_ARTIGOS = true;
   const DADOS_INICIO = {
     ultimaEdicao: "Edição Actual: Vol. 2026, Edição n.º 1 (Ago – Dez)",
     editorial: {
       titulo: "Editorial",
       autor: "Prof. Dr. Cremildo José Yotamo",
-      pdf: "https://exemplo.com/editorial.pdf",
+      pdf: "https://drive.google.com/file/d/1ZDakALIP-zS7xaZGiby8MXQvcHc5kLT3/view?usp=drive_link",
     },
     artigos: [
       {
-        titulo: "Impacto das Microfinanças no Rendimento das Famílias Urbanas no Município de Nampula (2019–2023)",
-        autor: "Armindo Joaquim Mussa",
-        pdf: "https://exemplo.com/artigo1.pdf",
+        titulo: "Influência de Conflitos Laborais nas Relações Interpessoais dos Trabalhadores: Caso da Focus-Comércio e Serviços (2022–2024)",
+        autor: "Elidate Ezequiel Aspirante & Itelvina Ribeiro",
+        pdf: "https://drive.google.com/file/d/1rX5FUw9Lttxx7OGn09Z8IY6OxVt1uzSX/view?usp=drive_link",
       },
       {
-        titulo: "Determinantes do Crescimento das Pequenas e Médias Empresas na Cidade de Maputo no Período Pós-COVID-19 (2020–2022)",
-        autor: "Helena Maria Chale",
-        pdf: "https://exemplo.com/artigo2.pdf",
+        titulo: "Aplicação da Economia Comportamental no Sector Público: Evidências dos Funcionários da Saúde e da Educação na Cidade de Nampula (2024–2025)",
+        autor: "Eva Pedro & Abudo Sadate Ucade",
+        pdf: "https://drive.google.com/file/d/1EZcrCITnBV6H5zIIJSfNfjxBvZvCpvpy/view?usp=drive_link",
       },
       {
-        titulo: "Efeitos da Política Monetária do Banco de Moçambique na Inflação Nacional (2015–2022)",
-        autor: "Carlos Alberto Macamo",
-        pdf: "https://exemplo.com/artigo3.pdf",
+        titulo: "Determinantes das Exportações em Moçambique (2010–2023)",
+        autor: "Carlos Pires & Castigo Castigo",
+        pdf: "https://drive.google.com/file/d/1UEHVPnKfqZgYEUI0diaHpCjkoQWe27WY/view?usp=drive_link",
       },
       {
-        titulo: "Práticas de Gestão Estratégica e Desempenho das Empresas Familiares do Sector Comercial na Província de Nampula (2018–2022)",
-        autor: "Lídia Ernesto Nhampossa",
-        pdf: "https://exemplo.com/artigo4.pdf",
+        titulo: "O Impacto da Inflação no Poder de Compra dos Funcionários Públicos: Estudo de Caso da Direcção Provincial da Indústria e Comércio da Cidade de Nampula (2016–2024)",
+        autor: "Denis Mita Manuel & Abudo Sadate Ucade",
+        pdf: "https://drive.google.com/file/d/1u2CWqgb7oPd3N7XqAP8E7Vj17ABvYE_r/view?usp=drive_link",
       },
       {
-        titulo: "Influência da Cultura Organizacional na Motivação dos Trabalhadores das Empresas Privadas da Cidade de Maputo (2019–2021)",
-        autor: "Nelson Tomás Langa",
-        pdf: "https://exemplo.com/artigo5.pdf",
+        titulo: "Práticas de Promoção da Saúde Ocupacional nas Organizações: O Caso dos Funcionários do Comando Provincial da Polícia da República de Moçambique em Nampula (2022–2024)",
+        autor: "Manuel Alberto António & Lucília Consolo",
+        pdf: "https://drive.google.com/file/d/1Db58t7jFk-LEu3r6cAv7YILyO1vceUfu/view?usp=drive_link",
       },
       {
-        titulo: "Gestão de Recursos Humanos e Produtividade Docente nas Instituições Públicas de Ensino Superior em Moçambique (2017–2022)",
-        autor: "Rosa Amélia Cossa",
-        pdf: "https://exemplo.com/artigo6.pdf",
-      },
-      {
-        titulo: "Qualidade da Informação Contabilística e Tomada de Decisão nas Pequenas e Médias Empresas da Cidade de Nampula (2018–2022)",
-        autor: "Paulo Sérgio Matavele",
-        pdf: "https://exemplo.com/artigo7.pdf",
-      },
-      {
-        titulo: "Eficácia do Sistema de Controlo Interno na Prevenção de Fraudes nas Empresas Comerciais de Maputo (2019–2023)",
-        autor: "Ana Paula Nhantumbo",
-        pdf: "https://exemplo.com/artigo8.pdf",
-      },
-      {
-        titulo: "Descentralização Administrativa e Qualidade da Prestação de Serviços Públicos no Distrito de Ribáuè, Província de Nampula (2016–2021)",
-        autor: "Eusébio Francisco Mucavel",
-        pdf: "https://exemplo.com/artigo9.pdf",
-      },
-      {
-        titulo: "Transparência na Gestão Pública e Combate à Corrupção nos Conselhos Municipais de Moçambique (2015–2022)",
-        autor: "Julieta Teresa Mabunda",
-        pdf: "https://exemplo.com/artigo10.pdf",
+        titulo: "Análise de Competitividade no Mercado de Combustível à Luz das 5 Forças de Porter: Caso da Cidade de Nampula (2003–2026)",
+        autor: "Adolfo Paiva & Cremildo Yotamo",
+        pdf: "https://drive.google.com/file/d/1pRYomeD2BvTsPDWuxvS74G0TCJameluv/view?usp=drive_link",
       },
     ],
   };
