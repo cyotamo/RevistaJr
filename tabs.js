@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         titulo: "Práticas de Promoção da Saúde Ocupacional nas Organizações: O Caso dos Funcionários do Comando Provincial da Polícia da República de Moçambique em Nampula (2022–2024)",
         autor: "Manuel Alberto António & Lucília Consolo",
-        pdf: "https://drive.google.com/file/d/1Db58t7jFk-LEu3r6cAv7YILyO1vceUfu/view?usp=drive_link",
+        pdf: "https://drive.google.com/file/d/1gsmFrDlaG0k859oITtgjXKscy5Ssxsk_/view?usp=drive_link",
       },
       {
         titulo: "Análise de Competitividade no Mercado de Combustível à Luz das 5 Forças de Porter: Caso da Cidade de Nampula (2003–2026)",
